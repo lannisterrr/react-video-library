@@ -1,0 +1,27 @@
+.video-lib__main-head {
+  background-color: var(--bg-primary);
+  position: sticky;
+  top: 0px;
+}
+
+.video-lib__main-nav {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  padding: 1rem;
+  min-height: 10vh;
+  align-items: center;
+}
+
+.video-lib__btn-signIn {
+  margin-left: auto;
+}
+
+.signIn-icon {
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.video-lib__input-container {
+  margin: 0 auto;
+}
