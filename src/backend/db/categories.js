@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
 
 /**
  * Category Database can be added here.
@@ -8,20 +8,30 @@ import { v4 as uuid } from "uuid";
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "Computer Programming",
-    description:
-      "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing",
+    categoryName: 'Neuroscience',
+    description: 'Study of the mind by looking at the brain',
   },
   {
     _id: uuid(),
-    categoryName: "Frontend Development",
+    categoryName: 'Developmental',
     description:
-      "Front-end web development, also known as client-side development is the practice of producing HTML, CSS and JavaScript for a website or Web Application",
+      'Branch of psychology which focuses on how people grow and learn',
   },
   {
     _id: uuid(),
-    categoryName: "Backend Development",
+    categoryName: 'Coginitive',
+    description: 'Computational Approach to understand human behaviour',
+  },
+  {
+    _id: uuid(),
+    categoryName: 'Social',
+    description: 'Branch of psychology which focuses on how people interact',
+  },
+
+  {
+    _id: uuid(),
+    categoryName: 'Clinical',
     description:
-      "Backend Development is also known as server-side development. It is everything that the users don't see and contains behind-the-scenes activities that occur when performing any action on a website.",
+      'Branch of psychology which examines mental health and mental illnesses.',
   },
 ];
