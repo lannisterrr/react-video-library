@@ -7,7 +7,7 @@ function Sidebar() {
         <li class="video-lib__logo">
           <a href="#" class="video-lib__nav-link">
             <span class="video-lib__link-text video-lib__logo-text">
-              Brain Tube
+              Psychology Tube
             </span>
             <svg
               aria-hidden="true"

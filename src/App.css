@@ -19,7 +19,7 @@ main {
 }
 
 body::-webkit-scrollbar {
-  width: 0.85rem;
+  width: 0.45rem;
 }
 
 body::-webkit-scrollbar-track {
@@ -82,7 +82,7 @@ body::-webkit-scrollbar-thumb {
   }
 
   .video-lib__navbar:hover .video-lib__logo svg {
-    margin-left: 15rem;
+    margin-left: 20rem;
   }
 
   .video-lib__navbar:hover .video-lib__logo-text {
