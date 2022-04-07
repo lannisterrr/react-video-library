@@ -95,11 +95,12 @@ export const videos = [
   {
     _id: uuid(),
     categoryName: 'Developmental',
-    creator: 'R. J. Birmingham',
+    creator: 'Jordan B Peterson',
     creatorLogo: {
-      altText: 'R. J. Birmingham Logo',
-      url: 'https://yt3.ggpht.com/ytc/AKedOLT7srSUrTXvtIuWhzUbGxC3l8PJduNwERDM4AP7=s88-c-k-c0x00ffffff-no-rj',
+      altText: 'Jordan B Peterson Logo',
+      url: 'https://yt3.ggpht.com/aoJ9M6s2RCOH9-ULFs7ll9aS-viz4wj84VgdGmyJSkPdPySIZggg2nwyt5YGlLnfE5DTzt3J34s=s88-c-k-c0x00ffffff-no-rj',
     },
+
     isInWatchLater: false,
     isLiked: false,
     thumbnail: {
@@ -116,10 +117,10 @@ export const videos = [
   {
     _id: uuid(),
     categoryName: 'Developmental',
-    creator: 'Jordan B Peterson',
+    creator: 'R. J. Birmingham',
     creatorLogo: {
-      altText: 'Jordan B Peterson Logo',
-      url: 'https://yt3.ggpht.com/aoJ9M6s2RCOH9-ULFs7ll9aS-viz4wj84VgdGmyJSkPdPySIZggg2nwyt5YGlLnfE5DTzt3J34s=s88-c-k-c0x00ffffff-no-rj',
+      altText: 'R. J. Birmingham Logo',
+      url: 'https://yt3.ggpht.com/ytc/AKedOLT7srSUrTXvtIuWhzUbGxC3l8PJduNwERDM4AP7=s88-c-k-c0x00ffffff-no-rj',
     },
     isInWatchLater: false,
     isLiked: false,
@@ -216,5 +217,48 @@ export const videos = [
     description:
       'Oxford Professor of Clinical Psychology, Susan Llewelyn gives an insight into the world of clinical psychologists and their patients.',
     videoYTId: 'VpmB9C01qLY',
+  },
+
+  {
+    _id: uuid(),
+    categoryName: 'Clinical',
+    creator: 'Judith Johnson',
+    creatorLogo: {
+      altText: 'Judith Johnson Logo',
+      url: 'https://yt3.ggpht.com/WnTcZASHvf62p4Mlo9vKBo6v8GKM5ewwdxVUNDsBPU4OaKpFtzWUxNDKIRqDSHOdHcsdih7TJw=s88-c-k-c0x00ffffff-no-rj',
+    },
+    isInWatchLater: false,
+    isLiked: false,
+    thumbnail: {
+      altText:
+        'Case study clinical example CBT: First session with a client with symptoms of depression (CBT model) Thumbnail',
+      url: 'http://i3.ytimg.com/vi/7LD8iC4NqXM/hqdefault.jpg',
+    },
+    title:
+      'Case study clinical example CBT: First session with a client with symptoms of depression (CBT model)',
+    description:
+      'Case study example for use in teaching, aiming to demonstrate some of the triggers, thoughts, feelings and responses linked with problematic low mood.',
+    videoYTId: '7LD8iC4NqXM',
+  },
+
+  {
+    _id: uuid(),
+    categoryName: 'Cognitive',
+    creator: 'MedCircle',
+    creatorLogo: {
+      altText: 'MedCircle Logo',
+      url: 'https://yt3.ggpht.com/PpFUz6yXZoGtI4NMosmzQ-6MzYbmmLwbCPhnd6u2aqs74pIiF3bjSBB_pW-lrYsF7LhswgVdrQ=s88-c-k-c0x00ffffff-no-rj',
+    },
+    isInWatchLater: false,
+    isLiked: false,
+    thumbnail: {
+      altText:
+        'What a Cognitive Behavioral Therapy (CBT) Session Looks Like Thumbnail',
+      url: 'http://i3.ytimg.com/vi/8-2WQF3SWwo/hqdefault.jpg',
+    },
+    title: 'What a Cognitive Behavioral Therapy (CBT) Session Looks Like',
+    description:
+      'In our MedCircle series on cognitive behavioral therapy (CBT), Dr. Judy Ho and Kyle sat down to discuss how the therapy works and how it changes your thoughts, your emotions, and ultimately, your behaviors.',
+    videoYTId: '8-2WQF3SWwo',
   },
 ];

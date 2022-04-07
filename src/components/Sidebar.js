@@ -2,7 +2,7 @@ import React from 'react';
 
 function Sidebar() {
   return (
-    <aside className="video-lib__navbar">
+    <aside className="video-lib__navbar z-index-md">
       <ul className="video-lib__navbar-nav">
         <li class="video-lib__logo">
           <a href="#" class="video-lib__nav-link">

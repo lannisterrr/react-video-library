@@ -4,6 +4,8 @@
 @import './Styles/navbar.css';
 @import './Styles/sidebar.css';
 @import './Styles/searchBar.css';
+@import './Styles/ListingVideoComponent.css';
+@import './Styles/home.css';
 :root {
   font-family: 'Lato', sans-serif;
   --text-primary: #b6b6b6;
@@ -15,7 +17,6 @@
 
 main {
   margin-left: 8rem;
-  padding: 1.6rem;
 }
 
 body::-webkit-scrollbar {
@@ -55,6 +56,7 @@ body::-webkit-scrollbar-thumb {
 
   main {
     margin: 0;
+    margin-bottom: 7rem;
   }
 
   .search-bar {
@@ -63,6 +65,14 @@ body::-webkit-scrollbar-thumb {
 
   .search-bar:focus-within {
     width: 70%;
+  }
+  .video-lib__listing-page {
+    gap: 2.5rem;
+  }
+
+  .listing-video__card {
+    padding-bottom: 1rem;
+    align-items: center;
   }
 }
 
@@ -73,6 +83,9 @@ body::-webkit-scrollbar-thumb {
     height: 100vh;
   }
 
+  main {
+    padding: 1.6rem;
+  }
   .video-lib__navbar:hover {
     width: 26rem;
   }
@@ -95,5 +108,15 @@ body::-webkit-scrollbar-thumb {
 
   .search-bar {
     margin: auto;
+  }
+
+  .video-lib__listing-page {
+    justify-content: center;
+    row-gap: 2rem;
+  }
+
+  .listing-video__card {
+    max-width: 300px;
+    margin-left: 3rem;
   }
 }

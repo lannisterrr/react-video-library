@@ -1,0 +1,6 @@
+.video-lib__listing-page {
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+}
