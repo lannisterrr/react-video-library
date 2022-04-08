@@ -1,15 +1,16 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 
+import { useData } from '../contexts/data-context';
+
 function Home() {
-  const [videosData, setVideosData] = useState([]);
-  const [categoriesData, setCategoriesData] = useState([]);
+  const { dataState, dispatch } = useData();
   useEffect(() => {
     (async () => {
       try {
         const res = await axios.get('/api/videos');
-        setVideosData(res.data.videos);
+        dispatch({ type: 'GET_VIDEOS', payload: res.data.videos });
       } catch (error) {
         console.log(error);
       }
@@ -20,7 +21,7 @@ function Home() {
     (async () => {
       try {
         const res = await axios.get('/api/categories');
-        setCategoriesData(res.data.categories);
+        dispatch({ type: 'GET_CATEGORIES', payload: res.data.categories });
       } catch (error) {
         console.log(error);
       }
@@ -30,14 +31,14 @@ function Home() {
   return (
     <>
       <div className="video-lib__filters-container z-index-md">
-        {categoriesData.map(category => (
+        {dataState.categories.map(category => (
           <button key={category._id} className="video-lib__filter m-h-3">
             {category.categoryName}
           </button>
         ))}
       </div>
       <main className="video-lib__listing-page">
-        {videosData.map(video => (
+        {dataState.videos.map(video => (
           <ListingVideoComponent key={video._id} video={video} />
         ))}
       </main>

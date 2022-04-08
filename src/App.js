@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import MockmanEs from 'mockman-js';
 import Home from './Pages/Home';
+import SingleVideoPage from './Pages/SingleVideoPage';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/mock" element={<MockmanEs />} />
-
+        <Route path="/video/:videoId" element={<SingleVideoPage />} />
         <Route
           path="*"
           element={
