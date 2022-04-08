@@ -8,6 +8,11 @@ import { v4 as uuid } from 'uuid';
 export const categories = [
   {
     _id: uuid(),
+    categoryName: 'All',
+    description: 'Videos from all the branches of Psychology',
+  },
+  {
+    _id: uuid(),
     categoryName: 'Neuroscience',
     description: 'Study of the mind by looking at the brain',
   },

@@ -4,3 +4,25 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.video-lib__filters-container {
+  display: flex;
+  background: var(--bg-primary);
+}
+
+.video-lib__filter {
+  padding: 0.7rem 1.5rem;
+  border: 1px solid var(--grey-color);
+  color: var(--text-secondary);
+  background: transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.video-lib__filter:hover {
+  background: var(--primary-color);
+}
+
+.filter-active {
+  background: var(--primary-color);
+}

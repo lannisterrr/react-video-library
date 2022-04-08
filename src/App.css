@@ -74,6 +74,14 @@ body::-webkit-scrollbar-thumb {
     padding-bottom: 1rem;
     align-items: center;
   }
+
+  .video-lib__filters-container {
+    width: 100%;
+    overflow: auto;
+    padding-bottom: 1.6rem;
+    position: fixed;
+    top: 1;
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -118,5 +126,8 @@ body::-webkit-scrollbar-thumb {
   .listing-video__card {
     max-width: 300px;
     margin-left: 3rem;
+  }
+  .video-lib__filters-container {
+    justify-content: center;
   }
 }
