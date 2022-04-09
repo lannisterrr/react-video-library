@@ -1,0 +1,40 @@
+.single-videoPage__wrapper {
+  min-height: 100vh;
+  display: grid;
+}
+
+.video-container {
+  position: relative;
+  padding-top: 56.25%;
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.video-info-container {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--grey-color);
+}
+
+.video-info__description {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.video-info__description img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+
+.video-info__creator {
+  background: var(--primary-color);
+  padding: 0.7rem 1rem;
+}

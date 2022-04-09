@@ -6,6 +6,7 @@
 @import './Styles/searchBar.css';
 @import './Styles/ListingVideoComponent.css';
 @import './Styles/home.css';
+@import './Styles/singleVideoPage.css';
 :root {
   font-family: 'Lato', sans-serif;
   --text-primary: #b6b6b6;
@@ -16,6 +17,8 @@
 }
 
 main {
+  background: var(--bg-primary);
+  color: var(--text-secondary);
   margin-left: 8rem;
 }
 
@@ -82,6 +85,20 @@ body::-webkit-scrollbar-thumb {
     position: fixed;
     top: 1;
   }
+
+  .single-videoPage__wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .video-info-container {
+    flex-direction: column;
+  }
+  .video-info__cta {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -129,5 +146,13 @@ body::-webkit-scrollbar-thumb {
   }
   .video-lib__filters-container {
     justify-content: center;
+  }
+
+  .single-videoPage__wrapper {
+    grid-template-columns: 2fr 1fr;
+    gap: 1.2rem;
+  }
+  .video-info__cta {
+    margin-left: auto;
   }
 }
