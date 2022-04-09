@@ -27,7 +27,7 @@ function SingleVideoPage() {
           />
         </div>
         <div className="video-info-container">
-          <p className="heading-3">{video.title}</p>
+          <p className="heading-3 video-info__title">{video.title}</p>
           <div className="video-info__cta">
             <span>
               <i class="fa-regular fa-thumbs-up f-8 p-h-2 pointer"></i>
@@ -47,7 +47,49 @@ function SingleVideoPage() {
         <p className="f-6">{video.description}</p>
       </div>
       <div className="single-video__notes-container">
-        <p className="heading-4">Add Notes :</p>
+        <p className="heading-4 center-text t-c-3">Add Notes :</p>
+        <div className="note__input-field">
+          <input
+            type="text"
+            placeholder="Title..."
+            className="note__input p-v-4"
+          />
+          <textarea
+            name="notes-text"
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="Description..."
+            className="note__input note__input-textarea"
+          ></textarea>
+          <div className="input-field__button-container">
+            <button className="input-field__button m-h-4">Save</button>
+            <button className="input-field__button">Discard</button>
+          </div>
+        </div>
+        <div className="user-note  p-h-3">
+          <div className="user-note__header">
+            <p className="f-6 video-lib-text-2">Hyphotesis exercise</p>
+            <span className="user-note__time-stamp f-8">
+              <i class="fa-regular fa-clock f-8 p-h-2"></i>
+              1:04
+            </span>
+          </div>
+          <p className="f-6 video-lib-text-1">
+            This is what I refer to as experimentation and hypothesis-testing.
+            Experimentation can have somewhat of a negative connotation to some,
+            indicating engagement in “impulsive” types of behaviors (e.g., sex,
+            drugs, gambling).
+          </p>
+          <div className="user-note__btn">
+            <span className="m-h-2">
+              <i class="fa-solid fa-pen f-7  pointer"></i>
+            </span>
+            <span className="m-h-2">
+              <i class="fa-solid fa-trash f-7  pointer"></i>
+            </span>
+          </div>
+        </div>
       </div>
     </main>
   );

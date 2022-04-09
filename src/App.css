@@ -16,6 +16,14 @@
   --transition-speed: 600ms;
 }
 
+.video-lib-text-1 {
+  color: var(--text-primary);
+}
+
+.video-lib-text-2 {
+  color: var(--text-secondary);
+}
+
 main {
   background: var(--bg-primary);
   color: var(--text-secondary);
@@ -154,5 +162,9 @@ body::-webkit-scrollbar-thumb {
   }
   .video-info__cta {
     margin-left: auto;
+  }
+
+  .video-info__title {
+    flex: 1;
   }
 }

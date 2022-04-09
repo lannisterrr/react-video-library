@@ -38,3 +38,70 @@
   background: var(--primary-color);
   padding: 0.7rem 1rem;
 }
+
+.single-video__notes-container {
+  max-width: 500px;
+}
+
+.note__input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-bottom: 1px solid rgba(79, 78, 78, 0.5);
+  padding: 1rem 0;
+}
+
+.note__input::placeholder {
+  color: var(--text-primary);
+  padding: 2px 4px;
+}
+
+.note__input {
+  background: var(--bg-primary);
+  border: 1px solid rgba(79, 78, 78, 0.5);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  padding: 0.7rem;
+}
+
+.note__input:focus {
+  outline: thin;
+}
+
+.input-field__button-container {
+  margin-left: auto;
+}
+
+.note__input-textarea {
+  resize: none;
+}
+
+.input-field__button {
+  padding: 0.7rem 1rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--grey-color);
+  cursor: pointer;
+}
+
+.input-field__button:hover {
+  filter: brightness(85%);
+}
+
+.user-note {
+  margin-top: 1.5rem;
+  border: 1px solid var(--grey-color);
+  margin-bottom: 1rem;
+}
+
+.user-note__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-note__btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
