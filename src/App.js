@@ -2,8 +2,14 @@ import './App.css';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import MockmanEs from 'mockman-js';
-import Home from './Pages/Home';
-import SingleVideoPage from './Pages/SingleVideoPage';
+import {
+  Home,
+  SingleVideoPage,
+  PlaylistPage,
+  HistoryPage,
+  LikePage,
+  WatchLaterPage,
+} from './Pages';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -15,6 +21,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/mock" element={<MockmanEs />} />
         <Route path="/video/:videoId" element={<SingleVideoPage />} />
+        <Route path="/playlist" element={<PlaylistPage />} />
+        <Route path="/history" element={<HistoryPage />} />
+        <Route path="/liked" element={<LikePage />} />
+        <Route path="/watchlater" element={<WatchLaterPage />} />
+
         <Route
           path="*"
           element={

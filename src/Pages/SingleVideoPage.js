@@ -95,4 +95,4 @@ function SingleVideoPage() {
   );
 }
 
-export default SingleVideoPage;
+export { SingleVideoPage };
