@@ -1,51 +1,133 @@
-.App {
-  text-align: center;
+@import url('https://cerebrumui.netlify.app/style.css');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
+@import './Styles/navbar.css';
+@import './Styles/sidebar.css';
+@import './Styles/searchBar.css';
+@import './Styles/ListingVideoComponent.css';
+@import './Styles/home.css';
+:root {
+  font-family: 'Lato', sans-serif;
+  --text-primary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+  --transition-speed: 600ms;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+main {
+  margin-left: 8rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body::-webkit-scrollbar {
+  width: 0.45rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--complimentary-bg-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
+
+/* Small Screens */
+
+@media only screen and (max-width: 600px) {
+  .video-lib__navbar {
+    bottom: 0;
+    width: 100vw;
+    height: 8rem;
+  }
+  .video-lib__logo {
+    display: none;
+  }
+  .video-lib__navbar-nav {
+    flex-direction: row;
+  }
+
+  .video-lib__nav-link {
+    justify-content: center;
+  }
+
+  .video-lib__nav-link svg {
+    min-width: 2rem;
+  }
+
+  main {
+    margin: 0;
+    margin-bottom: 7rem;
+  }
+
+  .search-bar {
+    margin-right: auto;
+  }
+
+  .search-bar:focus-within {
+    width: 70%;
+  }
+  .video-lib__listing-page {
+    gap: 2.5rem;
+  }
+
+  .listing-video__card {
+    padding-bottom: 1rem;
+    align-items: center;
+  }
+
+  .video-lib__filters-container {
+    width: 100%;
+    overflow: auto;
+    padding-bottom: 1.6rem;
+    position: fixed;
+    top: 1;
   }
 }
 
-.App-header {
-  background-color: #22201c;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
+@media screen and (min-width: 600px) {
+  .video-lib__navbar {
+    top: 0;
+    width: 8rem;
+    height: 100vh;
+  }
 
-.App-link {
-  color: #61dafb;
-}
+  main {
+    padding: 1.6rem;
+  }
+  .video-lib__navbar:hover {
+    width: 26rem;
+  }
 
-.brand-title {
-  font-size: 3rem;
-  color: #d9d9d9;
-}
+  .video-lib__navbar:hover .video-lib__link-text {
+    display: inline;
+  }
 
-.brand-title span {
-  color: #ffde59;
-}
+  .video-lib__navbar:hover .video-lib__logo svg {
+    margin-left: 20rem;
+  }
 
-.brand-description {
-  font-size: 1.4rem;
-}
+  .video-lib__navbar:hover .video-lib__logo-text {
+    left: 0px;
+  }
 
-.links {
-  display: flex;
-}
+  .search-bar:focus-within {
+    width: 25%;
+  }
 
-.links a {
-  color: #d9d9d9;
-  font-size: 1.2rem;
-  margin: 1rem;
+  .search-bar {
+    margin: auto;
+  }
+
+  .video-lib__listing-page {
+    justify-content: center;
+    row-gap: 2rem;
+  }
+
+  .listing-video__card {
+    max-width: 300px;
+    margin-left: 3rem;
+  }
+  .video-lib__filters-container {
+    justify-content: center;
+  }
 }
