@@ -1,10 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function ListingVideoComponent({ video }) {
-  const { creator, creatorLogo, thumbnail, title, videoYTID } = video;
+  const navigate = useNavigate();
+  const { _id, creator, creatorLogo, thumbnail, title, videoYTID } = video;
   return (
     <>
-      <div className="listing-video__card">
+      <div
+        onClick={() => navigate(`/video/${_id}`)}
+        className="listing-video__card"
+      >
         <figure className="listing-video__image-container">
           <img src={thumbnail.url} alt={thumbnail.altText} />
           <figcaption>

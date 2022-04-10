@@ -1,4 +1,4 @@
-import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 function Sidebar() {
   return (
@@ -36,7 +36,7 @@ function Sidebar() {
         </li>
 
         <li className="video-lib__nav-item">
-          <a href="#" className="video-lib__nav-link">
+          <NavLink to="/" className="video-lib__nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
               <path
                 fill="#df49a6"
@@ -44,11 +44,11 @@ function Sidebar() {
               />
             </svg>
             <span className="video-lib__link-text f-6">Home</span>
-          </a>
+          </NavLink>
         </li>
 
         <li class="video-lib__nav-item">
-          <a href="#" class="video-lib__nav-link">
+          <NavLink to="/playlist" className="video-lib__nav-link">
             <svg
               aria-hidden="true"
               focusable="false"
@@ -73,11 +73,11 @@ function Sidebar() {
               </g>
             </svg>
             <span class="video-lib__link-text f-6">Playlist</span>
-          </a>
+          </NavLink>
         </li>
 
         <li class="video-lib__nav-item">
-          <a href="#" class="video-lib__nav-link">
+          <NavLink to="/watchlater" className="video-lib__nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path
                 fill="#df49a6"
@@ -85,11 +85,11 @@ function Sidebar() {
               />
             </svg>
             <span class="video-lib__link-text f-6">Watch Later</span>
-          </a>
+          </NavLink>
         </li>
 
         <li class="video-lib__nav-item">
-          <a href="#" class="video-lib__nav-link">
+          <NavLink to="/liked" className="video-lib__nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path
                 fill="#df49a6"
@@ -97,11 +97,11 @@ function Sidebar() {
               />
             </svg>
             <span class="video-lib__link-text f-6">Liked</span>
-          </a>
+          </NavLink>
         </li>
 
         <li class="video-lib__nav-item">
-          <a href="#" class="video-lib__nav-link">
+          <NavLink to="/history" className="video-lib__nav-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path
                 fill="#df49a6"
@@ -109,7 +109,7 @@ function Sidebar() {
               />
             </svg>
             <span class="video-lib__link-text f-6">History</span>
-          </a>
+          </NavLink>
         </li>
 
         <li class="video-lib__nav-item">
