@@ -1,5 +1,7 @@
 @import url('https://cerebrumui.netlify.app/style.css');
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://unicons.iconscout.com/release/v4.0.0/css/line.css');
+
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
 @import './Styles/navbar.css';
 @import './Styles/sidebar.css';
@@ -7,6 +9,7 @@
 @import './Styles/ListingVideoComponent.css';
 @import './Styles/home.css';
 @import './Styles/singleVideoPage.css';
+@import './Styles/auth.css';
 :root {
   font-family: 'Lato', sans-serif;
   --text-primary: #b6b6b6;

@@ -9,6 +9,7 @@ import {
   HistoryPage,
   LikePage,
   WatchLaterPage,
+  Auth,
 } from './Pages';
 import { Routes, Route } from 'react-router-dom';
 
@@ -25,7 +26,7 @@ function App() {
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/liked" element={<LikePage />} />
         <Route path="/watchlater" element={<WatchLaterPage />} />
-
+        <Route path="/auth" element={<Auth />} />
         <Route
           path="*"
           element={
