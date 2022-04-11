@@ -10,11 +10,12 @@ const logInHandler = async (
   setFormError
 ) => {
   try {
+    const from = location.state?.from?.pathname || '/';
     const token = await loginService(email, password);
     localStorage.setItem('token', token);
     localStorage.setItem('isAuth', true);
     setAuth({ token, isAuth: true });
-    navigate(location?.state?.from?.pathname);
+    navigate(from);
   } catch (e) {
     setFormError(true);
     setTimeout(() => setFormError(false), 2000);
@@ -32,11 +33,12 @@ const signUpHandler = async (
   location
 ) => {
   try {
+    const from = location.state?.from?.pathname || '/';
     const token = await signupService(email, password, firstName, lastName);
     localStorage.setItem('token', token);
     localStorage.setItem('isAuth', true);
     setAuth({ token, isAuth: true });
-    navigate(location?.state?.from?.pathname);
+    navigate(from);
   } catch (error) {
     console.log(error);
   }
