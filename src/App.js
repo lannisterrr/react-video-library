@@ -12,12 +12,13 @@ import {
   Auth,
 } from './Pages';
 import RequiresAuth from './components/RequiresAuth';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 function App() {
+  const location = useLocation();
   return (
     <div className="App">
-      <Navbar />
+      {location.pathname !== '/auth' && <Navbar />}
       <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
