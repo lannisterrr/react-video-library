@@ -19,7 +19,17 @@ const initialState = {
 const signInReducer = (state, action) => {
   switch (action.type) {
     case 'RESET_FORM':
-      return initialState;
+      return {
+        ...state,
+        showPassword: false,
+        email: '',
+        password: '',
+        rememberMe: false,
+        signUpFirstName: '',
+        signUpLastName: '',
+        signUpEmail: '',
+        signUpPassword: '',
+      };
 
     case 'TEXT_INPUT':
       return {
@@ -63,8 +73,7 @@ const signInReducer = (state, action) => {
 const AuthProvider = ({ children }) => {
   const [loginState, dispatch] = useReducer(signInReducer, initialState);
   const [auth, setAuth] = useState(() => {
-    const token = localStorage.getItem('videoLibToken');
-
+    const token = localStorage.getItem('token');
     if (token) return { token, isAuth: true };
 
     return { token: '', isAuth: false };

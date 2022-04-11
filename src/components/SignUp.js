@@ -1,23 +1,34 @@
-import React from 'react';
 import { Checkbox } from '../components/Checkbox';
 import { useAuth } from '../contexts/auth-context';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-function SignUp() {
+function SignUp({ formError, setFormError }) {
   const { loginState, dispatch, signUpHandler, setAuth } = useAuth();
   const navigate = useNavigate();
-
+  const location = useLocation();
   const formSubmitHandler = e => {
     e.preventDefault();
-    signUpHandler(
-      loginState.signUpEmail,
-      loginState.signUpPassword,
-      loginState.signUpFirstName,
-      loginState.signUpLastName,
-      setAuth,
-      navigate
-    );
+    const letter = /[a-zA-Z]/;
+    const number = /[0-9]/;
+    const valid =
+      number.test(loginState.signUpPassword) &&
+      letter.test(loginState.signUpPassword);
+
+    if (valid) {
+      signUpHandler(
+        loginState.signUpEmail,
+        loginState.signUpPassword,
+        loginState.signUpFirstName,
+        loginState.signUpLastName,
+        setAuth,
+        navigate,
+        location
+      );
+    } else {
+      setFormError(true);
+      setTimeout(() => setFormError(false), 2000);
+    }
   };
 
   return (
@@ -67,7 +78,7 @@ function SignUp() {
                 payload: { key: 'signUpEmail', value: event.target.value },
               })
             }
-            type="text"
+            type="email"
             placeholder="Enter your email"
             class="form__email-input"
             required
@@ -123,6 +134,9 @@ function SignUp() {
             Sign-in now
           </span>
         </span>
+        {formError && (
+          <p className="f-7 t-c-3">Password shoulde be alpha numeric</p>
+        )}
       </div>
     </div>
   );

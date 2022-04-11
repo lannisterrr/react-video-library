@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
 import { Checkbox } from '../components/Checkbox';
 import { useAuth } from '../contexts/auth-context';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-function SignIn() {
-  const [formError, setFormError] = useState(false);
+function SignIn({ formError, setFormError }) {
   const { loginState, dispatch, logInHandler, setAuth, auth } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const logInFormHandler = e => {
     e.preventDefault();
     logInHandler(
@@ -14,13 +13,10 @@ function SignIn() {
       loginState.password,
       setAuth,
       navigate,
+      location,
       setFormError
     );
   };
-
-  useEffect(() => {
-    dispatch({ type: 'RESET_FORM' });
-  }, [formError]);
 
   return (
     <div class="form login">

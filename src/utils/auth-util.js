@@ -6,38 +6,37 @@ const logInHandler = async (
   password,
   setAuth,
   navigate,
+  location,
   setFormError
 ) => {
   try {
-    console.log(email, password);
     const token = await loginService(email, password);
-
-    localStorage.setItem('VideoLibToken', token);
+    localStorage.setItem('token', token);
     localStorage.setItem('isAuth', true);
     setAuth({ token, isAuth: true });
-    navigate('/');
+    navigate(location?.state?.from?.pathname);
   } catch (e) {
     setFormError(true);
-    setTimeout(() => setFormError(false), 1000);
+    setTimeout(() => setFormError(false), 2000);
     console.log(e);
   }
 };
 
 const signUpHandler = async (
-  firstName,
-  lastName,
   email,
   password,
+  firstName,
+  lastName,
   setAuth,
-  navigate
+  navigate,
+  location
 ) => {
   try {
-    console.log(firstName, lastName, email, password);
     const token = await signupService(email, password, firstName, lastName);
     localStorage.setItem('token', token);
     localStorage.setItem('isAuth', true);
     setAuth({ token, isAuth: true });
-    navigate('/');
+    navigate(location?.state?.from?.pathname);
   } catch (error) {
     console.log(error);
   }

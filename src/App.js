@@ -11,6 +11,7 @@ import {
   WatchLaterPage,
   Auth,
 } from './Pages';
+import RequiresAuth from './components/RequiresAuth';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -22,10 +23,38 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/mock" element={<MockmanEs />} />
         <Route path="/video/:videoId" element={<SingleVideoPage />} />
-        <Route path="/playlist" element={<PlaylistPage />} />
-        <Route path="/history" element={<HistoryPage />} />
-        <Route path="/liked" element={<LikePage />} />
-        <Route path="/watchlater" element={<WatchLaterPage />} />
+        <Route
+          path="/playlist"
+          element={
+            <RequiresAuth>
+              <PlaylistPage />
+            </RequiresAuth>
+          }
+        />
+        <Route
+          path="/history"
+          element={
+            <RequiresAuth>
+              <HistoryPage />
+            </RequiresAuth>
+          }
+        />
+        <Route
+          path="/liked"
+          element={
+            <RequiresAuth>
+              <LikePage />
+            </RequiresAuth>
+          }
+        />
+        <Route
+          path="/watchlater"
+          element={
+            <RequiresAuth>
+              <WatchLaterPage />
+            </RequiresAuth>
+          }
+        />
         <Route path="/auth" element={<Auth />} />
         <Route
           path="*"

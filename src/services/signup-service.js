@@ -15,7 +15,7 @@ const signupService = async (email, password, firstName, lastName) => {
       throw new Error(res);
     }
   } catch (err) {
-    console.log(err); // show page later
+    console.log(err);
   }
 };
 
