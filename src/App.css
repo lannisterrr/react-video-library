@@ -148,7 +148,7 @@ body::-webkit-scrollbar-thumb {
 
   .video-lib__listing-page {
     justify-content: center;
-    row-gap: 2rem;
+    row-gap: 2.7rem;
   }
 
   .listing-video__card {
