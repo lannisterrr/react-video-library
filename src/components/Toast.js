@@ -1,4 +1,4 @@
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 
 const Toast = forwardRef((props, ref) => {
   const [showToast, setShowToast] = useState(false);
@@ -6,9 +6,15 @@ const Toast = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     show() {
       setShowToast(true);
-      setTimeout(() => setShowToast(false), 3000);
     },
   }));
+
+  useEffect(() => {
+    const timeId = setTimeout(() => setShowToast(false), 3000);
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [showToast]);
 
   return (
     <div
