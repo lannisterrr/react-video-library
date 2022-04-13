@@ -10,6 +10,8 @@
 @import './Styles/home.css';
 @import './Styles/singleVideoPage.css';
 @import './Styles/auth.css';
+@import './Styles/toast.css';
+
 :root {
   font-family: 'Lato', sans-serif;
   --text-primary: #b6b6b6;
@@ -110,6 +112,14 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     display: flex;
     justify-content: space-around;
+  }
+
+  .alert-position {
+    position: fixed;
+    bottom: 20rem;
+    right: 2rem;
+    padding: 0.5rem;
+    font-size: 1rem;
   }
 }
 

@@ -5,6 +5,7 @@ import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { useData } from '../contexts/data-context';
 
 function Home() {
+  console.log('render home');
   const { dataState, dispatch } = useData();
   useEffect(() => {
     (async () => {

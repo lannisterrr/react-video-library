@@ -4,14 +4,26 @@ import ReactPlayer from 'react-player';
 import { useData } from '../contexts/data-context';
 import { addToLikes, removeFromLikes } from '../utils/like-utils';
 
-function SingleVideoPage() {
+function SingleVideoPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
   const { videoId } = useParams();
+
   function getVideoDetails(videos, videoId) {
     return videos.find(video => video._id === videoId);
   }
-  console.log(dataState.likes);
   const video = getVideoDetails(dataState.videos, videoId);
+
+  const handleAddtoLikes = () => {
+    addToLikes(video, dispatch);
+    toastRef.current.show();
+    getData('Added to liked ', 'success');
+  };
+
+  const handleRemoveFromLikes = () => {
+    removeFromLikes(video._id, dispatch);
+    toastRef.current.show();
+    getData('Removed from liked', 'fail');
+  };
 
   return (
     <main className="single-videoPage__wrapper">
@@ -32,12 +44,12 @@ function SingleVideoPage() {
             <span>
               {dataState.likes.find(i => i._id === video._id) ? (
                 <i
-                  onClick={() => removeFromLikes(video._id, dispatch)}
+                  onClick={handleRemoveFromLikes}
                   className="fa-solid fa-thumbs-up f-8 p-h-2 pointer"
                 ></i>
               ) : (
                 <i
-                  onClick={() => addToLikes(video, dispatch)}
+                  onClick={handleAddtoLikes}
                   className="fa-regular fa-thumbs-up f-8 p-h-2 pointer"
                 ></i>
               )}

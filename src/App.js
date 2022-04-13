@@ -1,4 +1,5 @@
 import './App.css';
+import { useRef, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import MockmanEs from 'mockman-js';
@@ -13,17 +14,37 @@ import {
 } from './Pages';
 import RequiresAuth from './components/RequiresAuth';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import Toast from './components/Toast';
 
 function App() {
+  const [toastData, setToastData] = useState({
+    message: '',
+    type: '',
+  });
+
+  const getToastProps = (message, type) => {
+    setToastData(prevToastData => ({
+      ...prevToastData,
+      message,
+      type,
+    }));
+  };
   const location = useLocation();
+  const toastRef = useRef(null);
   return (
     <div className="App">
       {location.pathname !== '/auth' && <Navbar />}
       <Sidebar />
+      <Toast ref={toastRef} message={toastData.message} type={toastData.type} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/mock" element={<MockmanEs />} />
-        <Route path="/video/:videoId" element={<SingleVideoPage />} />
+        <Route
+          path="/video/:videoId"
+          element={
+            <SingleVideoPage toastRef={toastRef} getData={getToastProps} />
+          }
+        />
         <Route
           path="/playlist"
           element={
