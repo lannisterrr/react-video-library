@@ -7,6 +7,7 @@ const useData = () => useContext(dataContext);
 const initialState = {
   videos: [],
   categories: [],
+  likes: [],
 };
 
 const dataReducer = (state, action) => {
@@ -21,6 +22,25 @@ const dataReducer = (state, action) => {
         ...state,
         categories: action.payload,
       };
+
+    case 'GET_LIKES':
+      return {
+        ...state,
+        likes: action.payload,
+      };
+
+    case 'ADD_TO_LIKES':
+      return {
+        ...state,
+        likes: action.payload,
+      };
+
+    case 'REMOVE_FROM_LIKES':
+      return {
+        ...state,
+        likes: action.payload,
+      };
+
     default:
       throw new Error(`Unknown action type: ${action.type}`);
   }

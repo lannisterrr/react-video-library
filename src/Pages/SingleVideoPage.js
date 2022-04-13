@@ -2,15 +2,15 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { useData } from '../contexts/data-context';
+import { addToLikes, removeFromLikes } from '../utils/like-utils';
 
 function SingleVideoPage() {
-  const { dataState } = useData();
+  const { dataState, dispatch } = useData();
   const { videoId } = useParams();
-
   function getVideoDetails(videos, videoId) {
     return videos.find(video => video._id === videoId);
   }
-
+  console.log(dataState.likes);
   const video = getVideoDetails(dataState.videos, videoId);
 
   return (
@@ -30,7 +30,17 @@ function SingleVideoPage() {
           <p className="heading-3 video-info__title">{video.title}</p>
           <div className="video-info__cta">
             <span>
-              <i class="fa-regular fa-thumbs-up f-8 p-h-2 pointer"></i>
+              {dataState.likes.find(i => i._id === video._id) ? (
+                <i
+                  onClick={() => removeFromLikes(video._id, dispatch)}
+                  class="fa-solid fa-thumbs-up f-8 p-h-2 pointer"
+                ></i>
+              ) : (
+                <i
+                  onClick={() => addToLikes(video, dispatch)}
+                  class="fa-regular fa-thumbs-up f-8 p-h-2 pointer"
+                ></i>
+              )}
             </span>
             <span>
               <i class="fa-regular fa-clock f-8 p-h-2 pointer"></i>

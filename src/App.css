@@ -31,6 +31,7 @@ main {
   background: var(--bg-primary);
   color: var(--text-secondary);
   margin-left: 8rem;
+  min-height: 100vh;
 }
 
 body::-webkit-scrollbar {
@@ -148,7 +149,7 @@ body::-webkit-scrollbar-thumb {
 
   .video-lib__listing-page {
     justify-content: center;
-    row-gap: 2rem;
+    row-gap: 2.7rem;
   }
 
   .listing-video__card {

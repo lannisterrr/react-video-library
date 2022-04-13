@@ -80,9 +80,28 @@
 }
 
 .listing-video__info-container {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.listing-video__menu-container {
+  position: absolute;
+  bottom: -2.8rem;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem 1rem 1rem;
+  background: var(--bg-secondary);
+}
+
+.menu-item {
+  margin-top: 5px;
+}
+
+.menu-item:hover {
+  filter: brightness(80%);
 }
 
 .listing-video__info-container img {
@@ -95,8 +114,13 @@
   background: transparent;
   outline: none;
   border: none;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   cursor: pointer;
+  border-radius: 50%;
+}
+
+.lisiting-video__info-button:hover {
+  background: var(--bg-secondary);
 }
 
 .lisiting-video__creator {
