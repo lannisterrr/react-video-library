@@ -39,7 +39,7 @@ function LikePage() {
                   onClick={() => removeFromLikes(item._id, dispatch)}
                   className="f-6 w-100 menu-item pointer"
                 >
-                  <i class="fa-solid fa-thumbs-up f-8 p-h-2"></i>
+                  <i className="fa-solid fa-thumbs-up f-8 p-h-2"></i>
                   Remove from likes
                 </span>
               </ListingVideoComponent>

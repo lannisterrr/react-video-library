@@ -19,14 +19,14 @@ function Navbar() {
             onClick={logoutUserHandler}
             className="video-lib__btn-signIn p-4"
           >
-            <i class="fa-solid fa-power-off t-c-3 signIn-icon"></i>
+            <i className="fa-solid fa-power-off t-c-3 signIn-icon"></i>
           </span>
         ) : (
           <span
             onClick={() => navigate('/auth')}
             className="video-lib__btn-signIn p-4"
           >
-            <i class="fa-solid fa-right-to-bracket t-c-3 signIn-icon"></i>
+            <i className="fa-solid fa-right-to-bracket t-c-3 signIn-icon"></i>
           </span>
         )}
       </nav>
