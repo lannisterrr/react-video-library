@@ -65,7 +65,7 @@ function App() {
           path="/liked"
           element={
             <RequiresAuth>
-              <LikePage />
+              <LikePage toastRef={toastRef} getData={getToastProps} />
             </RequiresAuth>
           }
         />
