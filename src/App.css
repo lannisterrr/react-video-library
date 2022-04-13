@@ -31,6 +31,7 @@ main {
   background: var(--bg-primary);
   color: var(--text-secondary);
   margin-left: 8rem;
+  min-height: 100vh;
 }
 
 body::-webkit-scrollbar {
