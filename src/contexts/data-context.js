@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
+import { dataReducer } from '../reducers/data-reducer';
 
 const dataContext = createContext();
 
@@ -8,48 +9,13 @@ const initialState = {
   videos: [],
   categories: [],
   likes: [],
-};
-
-const dataReducer = (state, action) => {
-  switch (action.type) {
-    case 'GET_VIDEOS':
-      return {
-        ...state,
-        videos: action.payload,
-      };
-    case 'GET_CATEGORIES':
-      return {
-        ...state,
-        categories: action.payload,
-      };
-
-    case 'GET_LIKES':
-      return {
-        ...state,
-        likes: action.payload,
-      };
-
-    case 'ADD_TO_LIKES':
-      return {
-        ...state,
-        likes: action.payload,
-      };
-
-    case 'REMOVE_FROM_LIKES':
-      return {
-        ...state,
-        likes: action.payload,
-      };
-
-    default:
-      throw new Error(`Unknown action type: ${action.type}`);
-  }
+  watchLater: [],
 };
 
 const DataProvider = ({ children }) => {
   const [dataState, dispatch] = useReducer(dataReducer, initialState);
   const contextValue = { dataState, dispatch };
-
+  console.log(dataState.likes, 'state');
   return (
     <dataContext.Provider value={contextValue}>{children}</dataContext.Provider>
   );
