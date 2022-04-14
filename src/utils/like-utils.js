@@ -25,7 +25,6 @@ const removeFromLikes = async (videoId, dispatch) => {
   try {
     const response = await axios.delete(`/api/user/likes/${videoId}`, config);
     dispatch({ type: 'REMOVE_FROM_LIKES', payload: response.data.likes });
-    console.log(response.data.likes, 'delete Call');
   } catch (e) {
     console.log(e);
   }

@@ -19,7 +19,7 @@ function ListingVideoComponent({ video, children }) {
           <img src={thumbnail.url} alt={thumbnail.altText} />
           <figcaption>
             <span>
-              <i class="fa-solid fa-play f-8 t-c-1"></i>
+              <i className="fa-solid fa-play f-8 t-c-1"></i>
             </span>
             <span className="f-8 f-bold t-c-1">play</span>
           </figcaption>
@@ -34,7 +34,7 @@ function ListingVideoComponent({ video, children }) {
             }}
             className="lisiting-video__info-button"
           >
-            <i class="fa-solid fa-ellipsis-vertical f-8 f-bold t-c-1"></i>
+            <i className="fa-solid fa-ellipsis-vertical f-8 f-bold t-c-1"></i>
           </button>
 
           {showMenu && <VideoMenu>{children}</VideoMenu>}

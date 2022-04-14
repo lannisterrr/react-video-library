@@ -4,14 +4,26 @@ import ReactPlayer from 'react-player';
 import { useData } from '../contexts/data-context';
 import { addToLikes, removeFromLikes } from '../utils/like-utils';
 
-function SingleVideoPage() {
+function SingleVideoPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
   const { videoId } = useParams();
+
   function getVideoDetails(videos, videoId) {
     return videos.find(video => video._id === videoId);
   }
-  console.log(dataState.likes);
   const video = getVideoDetails(dataState.videos, videoId);
+
+  const handleAddtoLikes = () => {
+    addToLikes(video, dispatch);
+    toastRef.current.show();
+    getData('Added to liked ', 'success');
+  };
+
+  const handleRemoveFromLikes = () => {
+    removeFromLikes(video._id, dispatch);
+    toastRef.current.show();
+    getData('Removed from liked', 'fail');
+  };
 
   return (
     <main className="single-videoPage__wrapper">
@@ -32,21 +44,21 @@ function SingleVideoPage() {
             <span>
               {dataState.likes.find(i => i._id === video._id) ? (
                 <i
-                  onClick={() => removeFromLikes(video._id, dispatch)}
-                  class="fa-solid fa-thumbs-up f-8 p-h-2 pointer"
+                  onClick={handleRemoveFromLikes}
+                  className="fa-solid fa-thumbs-up f-8 p-h-2 pointer"
                 ></i>
               ) : (
                 <i
-                  onClick={() => addToLikes(video, dispatch)}
-                  class="fa-regular fa-thumbs-up f-8 p-h-2 pointer"
+                  onClick={handleAddtoLikes}
+                  className="fa-regular fa-thumbs-up f-8 p-h-2 pointer"
                 ></i>
               )}
             </span>
             <span>
-              <i class="fa-regular fa-clock f-8 p-h-2 pointer"></i>
+              <i className="fa-regular fa-clock f-8 p-h-2 pointer"></i>
             </span>
             <span>
-              <i class="fa-regular fa-folder f-8 p-h-2 pointer"></i>
+              <i className="fa-regular fa-folder f-8 p-h-2 pointer"></i>
             </span>
           </div>
         </div>
@@ -81,7 +93,7 @@ function SingleVideoPage() {
           <div className="user-note__header">
             <p className="f-6 video-lib-text-2">Hyphotesis exercise</p>
             <span className="user-note__time-stamp f-8">
-              <i class="fa-regular fa-clock f-8 p-h-2"></i>
+              <i className="fa-regular fa-clock f-8 p-h-2"></i>
               1:04
             </span>
           </div>
@@ -93,10 +105,10 @@ function SingleVideoPage() {
           </p>
           <div className="user-note__btn">
             <span className="m-h-2">
-              <i class="fa-solid fa-pen f-7  pointer"></i>
+              <i className="fa-solid fa-pen f-7  pointer"></i>
             </span>
             <span className="m-h-2">
-              <i class="fa-solid fa-trash f-7  pointer"></i>
+              <i className="fa-solid fa-trash f-7  pointer"></i>
             </span>
           </div>
         </div>

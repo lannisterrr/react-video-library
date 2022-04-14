@@ -5,9 +5,15 @@ import { useAuth } from '../contexts/auth-context';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { removeFromLikes } from '../utils/like-utils';
 
-function LikePage() {
+function LikePage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
   const { auth } = useAuth();
+
+  const handleRemoveFromLikes = videoId => {
+    removeFromLikes(videoId, dispatch);
+    toastRef.current.show();
+    getData('Removed from liked', 'fail');
+  };
 
   useEffect(() => {
     if (!auth.isAuth) return;
@@ -18,7 +24,6 @@ function LikePage() {
             authorization: localStorage.getItem('token'),
           },
         });
-        console.log(res.data.likes, 'Get Likes');
         dispatch({ type: 'GET_LIKES', payload: res.data.likes });
       } catch (error) {
         console.log(error);
@@ -36,10 +41,10 @@ function LikePage() {
             {dataState.likes.map(item => (
               <ListingVideoComponent key={item.id} video={item}>
                 <span
-                  onClick={() => removeFromLikes(item._id, dispatch)}
+                  onClick={() => handleRemoveFromLikes(item._id)}
                   className="f-6 w-100 menu-item pointer"
                 >
-                  <i class="fa-solid fa-thumbs-up f-8 p-h-2"></i>
+                  <i className="fa-solid fa-thumbs-up f-8 p-h-2"></i>
                   Remove from likes
                 </span>
               </ListingVideoComponent>

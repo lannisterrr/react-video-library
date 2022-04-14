@@ -13,9 +13,9 @@ function Auth() {
   return (
     <main id="login-signup-page">
       <section
-        class={`forms__container ${loginState.isActive ? 'active' : ''}`}
+        className={`forms__container ${loginState.isActive ? 'active' : ''}`}
       >
-        <div class="forms">
+        <div className="forms">
           <SignIn formError={formError} setFormError={setFormError} />
           <SignUp formError={formError} setFormError={setFormError} />
         </div>
