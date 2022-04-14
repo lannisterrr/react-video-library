@@ -37,7 +37,10 @@ function App() {
       <Sidebar />
       <Toast ref={toastRef} message={toastData.message} type={toastData.type} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home toastRef={toastRef} getData={getToastProps} />}
+        />
         <Route path="/mock" element={<MockmanEs />} />
         <Route
           path="/video/:videoId"
@@ -73,7 +76,7 @@ function App() {
           path="/watchlater"
           element={
             <RequiresAuth>
-              <WatchLaterPage />
+              <WatchLaterPage toastRef={toastRef} getData={getToastProps} />
             </RequiresAuth>
           }
         />

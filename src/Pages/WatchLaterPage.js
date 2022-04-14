@@ -4,7 +4,7 @@ import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 
-function WatchLaterPage() {
+function WatchLaterPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
   const { auth } = useAuth();
 
@@ -18,12 +18,18 @@ function WatchLaterPage() {
           },
         });
         dispatch({ type: 'GET_WATCHLATER', payload: res.data.watchlater });
-        console.log(res.data.watchlater);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
+
+  console.log(dataState.watchLater);
+
+  // useEffect(() => {
+  //   toastRef.current.show();
+  //   getData('Deleted', 'fail');
+  // }, [dataState.watchLater]);
 
   return (
     <>
@@ -33,12 +39,12 @@ function WatchLaterPage() {
         <>
           <main className="video-lib__listing-page">
             {dataState.watchLater.map(item => (
-              <ListingVideoComponent key={item.id} video={item}>
-                <span className="f-6 w-100 menu-item pointer">
-                  <i className="fa-solid fa-thumbs-up f-8 p-h-2"></i>
-                  Remove from watch later
-                </span>
-              </ListingVideoComponent>
+              <ListingVideoComponent
+                key={item.id}
+                video={item}
+                toastRef={toastRef}
+                getData={getData}
+              ></ListingVideoComponent>
             ))}
           </main>
         </>

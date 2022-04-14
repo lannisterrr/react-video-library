@@ -15,7 +15,6 @@ const initialState = {
 const DataProvider = ({ children }) => {
   const [dataState, dispatch] = useReducer(dataReducer, initialState);
   const contextValue = { dataState, dispatch };
-  console.log(dataState.likes, 'state');
   return (
     <dataContext.Provider value={contextValue}>{children}</dataContext.Provider>
   );
