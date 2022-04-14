@@ -26,11 +26,6 @@ function WatchLaterPage({ toastRef, getData }) {
 
   console.log(dataState.watchLater);
 
-  // useEffect(() => {
-  //   toastRef.current.show();
-  //   getData('Deleted', 'fail');
-  // }, [dataState.watchLater]);
-
   return (
     <>
       {dataState.watchLater.length === 0 ? (
