@@ -1,17 +1,19 @@
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { Checkbox } from './Checkbox';
+import { useClickOutside } from '../customHooks/useClickOutside';
 import reactDom from 'react-dom';
 
-const Modal = forwardRef(() => {
+const Modal = forwardRef((props, ref) => {
   const [modalShow, setModalShow] = useState(false);
+  console.log(ref);
+  let domNode = useClickOutside(() => hide());
+  const hide = () => setModalShow(false);
 
   useImperativeHandle(ref, () => ({
     show() {
       setModalShow(true);
     },
-    hide() {
-      setModalShow(false);
-    },
+    hide,
   }));
 
   return reactDom.createPortal(
@@ -20,14 +22,13 @@ const Modal = forwardRef(() => {
         modalShow && 'show-modal'
       }`}
     >
-      <div className="modal video-lib__modal-container">
+      <div ref={domNode} className="modal video-lib__modal-container">
         <div className="modal-header video-lib__modal-header p-2">
           <h3 className="heading-4 p-h-2">save to...</h3>
-          <i className="fa fa-times f-8 close-icon p-h-2"></i>
+          <i onClick={hide} className="fa fa-times f-8 close-icon p-h-2"></i>
         </div>
         <div className="modal-content video-lib__modal-content p-8">
-          <Checkbox />
-          <span className="f-6">Add to watch Later</span>
+          <Checkbox title={'Add to watch Later'} />
         </div>
         <div className="video-lib__add-playlist p-4">
           <label htmlFor="playList-name" className="t-c-3 f-5 p-2 f-bold">
