@@ -1,36 +1,36 @@
 .alert-position {
-  position: absolute;
+  position: fixed;
   bottom: 1rem;
   right: 2rem;
 }
 
 #toast-show {
   visibility: visible;
-  animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+  animation: fadeIn 0.5s;
 }
 
 #toast-hide {
-  visibility: hidden;
+  animation: fadeOut 0.5s forwards;
 }
 
 @keyframes fadeIn {
   from {
-    bottom: 0;
+    transform: translateY(100%);
     opacity: 0;
   }
   to {
-    bottom: 3rem;
+    transform: translateY(0%);
     opacity: 1;
   }
 }
 
 @keyframes fadeOut {
   from {
-    bottom: 3rem;
+    transform: translateY(0%);
     opacity: 1;
   }
   to {
-    bottom: 0;
+    transform: translateY(100%);
     opacity: 0;
   }
 }

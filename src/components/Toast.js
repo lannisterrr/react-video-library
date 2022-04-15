@@ -21,7 +21,7 @@ const Toast = forwardRef((props, ref) => {
       id={showToast ? 'toast-show' : 'toast-hide'}
       className={`alert ${
         props.type === 'success' ? 'alert-success' : 'alert-red'
-      }  p-h-2 round-corner  alert-position`}
+      }  p-h-2 round-corner  alert-position z-index-lg`}
     >
       <span>
         <i

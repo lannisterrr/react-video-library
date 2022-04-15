@@ -2,9 +2,15 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { useData } from '../contexts/data-context';
+import { useAuth } from '../contexts/auth-context';
 import { addToLikes, removeFromLikes } from '../utils/like-utils';
+import {
+  addToWatchLater,
+  removeFromWatchLater,
+} from '../utils/watchLater-util';
 
 function SingleVideoPage({ toastRef, getData }) {
+  const { auth } = useAuth();
   const { dataState, dispatch } = useData();
   const { videoId } = useParams();
 
@@ -13,16 +19,15 @@ function SingleVideoPage({ toastRef, getData }) {
   }
   const video = getVideoDetails(dataState.videos, videoId);
 
-  const handleAddtoLikes = () => {
-    addToLikes(video, dispatch);
-    toastRef.current.show();
-    getData('Added to liked ', 'success');
-  };
-
-  const handleRemoveFromLikes = () => {
-    removeFromLikes(video._id, dispatch);
-    toastRef.current.show();
-    getData('Removed from liked', 'fail');
+  const handleCRUD = (func, message, type, funcParam1) => {
+    if (auth.isAuth) {
+      func(funcParam1, dispatch);
+      toastRef.current.show();
+      getData(message, type);
+    } else {
+      toastRef.current.show();
+      getData('Login First!!', 'fail');
+    }
   };
 
   return (
@@ -44,18 +49,44 @@ function SingleVideoPage({ toastRef, getData }) {
             <span>
               {dataState.likes.find(i => i._id === video._id) ? (
                 <i
-                  onClick={handleRemoveFromLikes}
+                  onClick={() =>
+                    handleCRUD(
+                      removeFromLikes,
+                      'Remove From liked',
+                      'fail',
+                      video._id
+                    )
+                  }
                   className="fa-solid fa-thumbs-up f-8 p-h-2 pointer"
                 ></i>
               ) : (
                 <i
-                  onClick={handleAddtoLikes}
+                  onClick={() =>
+                    handleCRUD(addToLikes, 'Added to liked', 'success', video)
+                  }
                   className="fa-regular fa-thumbs-up f-8 p-h-2 pointer"
                 ></i>
               )}
             </span>
             <span>
-              <i className="fa-regular fa-clock f-8 p-h-2 pointer"></i>
+              <i
+                onClick={() =>
+                  dataState.watchLater?.find(i => i._id === video._id)
+                    ? handleCRUD(
+                        removeFromWatchLater,
+                        'Remove From watchlater',
+                        'fail',
+                        video._id
+                      )
+                    : handleCRUD(
+                        addToWatchLater,
+                        'Added to Watch Later',
+                        'success',
+                        video
+                      )
+                }
+                className="fa-regular fa-clock f-8 p-h-2 pointer"
+              ></i>
             </span>
             <span>
               <i className="fa-regular fa-folder f-8 p-h-2 pointer"></i>

@@ -3,7 +3,7 @@ import { useClickOutside } from '../customHooks/useClickOutside';
 import { useNavigate } from 'react-router-dom';
 import { VideoMenu } from './VideoMenu';
 
-function ListingVideoComponent({ video, children }) {
+function ListingVideoComponent({ video, children, toastRef, getData }) {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const { _id, creator, creatorLogo, thumbnail, title } = video;
@@ -37,7 +37,16 @@ function ListingVideoComponent({ video, children }) {
             <i className="fa-solid fa-ellipsis-vertical f-8 f-bold t-c-1"></i>
           </button>
 
-          {showMenu && <VideoMenu>{children}</VideoMenu>}
+          {showMenu && (
+            <VideoMenu
+              toastRef={toastRef}
+              getData={getData}
+              video={video}
+              setShowMenu={setShowMenu}
+            >
+              {children}
+            </VideoMenu>
+          )}
         </div>
         <p className="f-5 lisiting-video__creator">{creator}</p>
       </div>

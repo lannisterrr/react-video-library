@@ -4,8 +4,7 @@ import { ListingVideoComponent } from '../components/ListingVideoComponent';
 
 import { useData } from '../contexts/data-context';
 
-function Home() {
-  console.log('render home');
+function Home({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
   useEffect(() => {
     (async () => {
@@ -40,7 +39,12 @@ function Home() {
       </div>
       <main className="video-lib__listing-page">
         {dataState.videos.map(video => (
-          <ListingVideoComponent key={video._id} video={video} />
+          <ListingVideoComponent
+            key={video._id}
+            video={video}
+            toastRef={toastRef}
+            getData={getData}
+          />
         ))}
       </main>
     </>
