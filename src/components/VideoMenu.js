@@ -5,7 +5,14 @@ import {
   removeFromWatchLater,
 } from '../utils/watchLater-util';
 
-function VideoMenu({ children, toastRef, getData, video, setShowMenu }) {
+function VideoMenu({
+  children,
+  toastRef,
+  getData,
+  video,
+  setShowMenu,
+  modalRef,
+}) {
   const { dataState, dispatch } = useData();
   const { auth } = useAuth();
 
@@ -20,6 +27,11 @@ function VideoMenu({ children, toastRef, getData, video, setShowMenu }) {
       getData('Login First!!', 'fail');
       setShowMenu(false);
     }
+  };
+
+  const handleOpenModal = () => {
+    modalRef.current.show();
+    setShowMenu(false);
   };
 
   const videoPresent = dataState.watchLater?.find(i => i._id === video._id);
@@ -48,7 +60,7 @@ function VideoMenu({ children, toastRef, getData, video, setShowMenu }) {
         {videoPresent ? 'Remove from watch later' : 'Add to watch Later'}
       </span>
 
-      <span className="f-6 w-100 menu-item pointer">
+      <span onClick={handleOpenModal} className="f-6 w-100 menu-item pointer">
         <i className="fa-regular fa-folder f-8 p-h-2 "></i>
         Add to Playlist
       </span>

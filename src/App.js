@@ -16,6 +16,7 @@ import RequiresAuth from './components/RequiresAuth';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Toast from './components/Toast';
 import { Modal } from './components/Modal';
+import { useClickOutside } from './customHooks/useClickOutside';
 
 function App() {
   const [toastData, setToastData] = useState({
@@ -42,7 +43,13 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Home toastRef={toastRef} getData={getToastProps} />}
+          element={
+            <Home
+              toastRef={toastRef}
+              getData={getToastProps}
+              modalRef={modalRef}
+            />
+          }
         />
         <Route path="/mock" element={<MockmanEs />} />
         <Route

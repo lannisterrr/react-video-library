@@ -3,7 +3,13 @@ import { useClickOutside } from '../customHooks/useClickOutside';
 import { useNavigate } from 'react-router-dom';
 import { VideoMenu } from './VideoMenu';
 
-function ListingVideoComponent({ video, children, toastRef, getData }) {
+function ListingVideoComponent({
+  video,
+  children,
+  toastRef,
+  getData,
+  modalRef,
+}) {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const { _id, creator, creatorLogo, thumbnail, title } = video;
@@ -43,6 +49,7 @@ function ListingVideoComponent({ video, children, toastRef, getData }) {
               getData={getData}
               video={video}
               setShowMenu={setShowMenu}
+              modalRef={modalRef}
             >
               {children}
             </VideoMenu>

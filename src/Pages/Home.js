@@ -4,7 +4,7 @@ import { ListingVideoComponent } from '../components/ListingVideoComponent';
 
 import { useData } from '../contexts/data-context';
 
-function Home({ toastRef, getData }) {
+function Home({ toastRef, getData, modalRef }) {
   const { dataState, dispatch } = useData();
   useEffect(() => {
     (async () => {
@@ -44,6 +44,7 @@ function Home({ toastRef, getData }) {
             video={video}
             toastRef={toastRef}
             getData={getData}
+            modalRef={modalRef}
           />
         ))}
       </main>
