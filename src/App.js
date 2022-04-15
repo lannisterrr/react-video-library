@@ -15,6 +15,7 @@ import {
 import RequiresAuth from './components/RequiresAuth';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Toast from './components/Toast';
+import { Modal } from './components/Modal';
 
 function App() {
   const [toastData, setToastData] = useState({
@@ -31,10 +32,12 @@ function App() {
   };
   const location = useLocation();
   const toastRef = useRef(null);
+  const modalRef = useRef(null);
   return (
     <div className="App">
       {location.pathname !== '/auth' && <Navbar />}
       <Sidebar />
+      <Modal ref={modalRef} />
       <Toast ref={toastRef} message={toastData.message} type={toastData.type} />
       <Routes>
         <Route

@@ -1,0 +1,23 @@
+.modal.video-lib__modal-container {
+  min-width: 23rem;
+  width: 23rem;
+  background: var(--bg-primary);
+}
+
+.modal-header.video-lib__modal-header {
+  background: var(--bg-primary);
+  align-items: center;
+  border-bottom: 1px solid var(--grey-color);
+}
+
+.modal-content.video-lib__modal-content {
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--grey-color);
+}
+
+.video-lib__add-playlist {
+  display: flex;
+  flex-direction: column;
+  display: none;
+}

@@ -11,6 +11,7 @@
 @import './Styles/singleVideoPage.css';
 @import './Styles/auth.css';
 @import './Styles/toast.css';
+@import './Styles/modal.css';
 
 :root {
   font-family: 'Lato', sans-serif;
