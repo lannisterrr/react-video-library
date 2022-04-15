@@ -1,4 +1,5 @@
 import { useData } from '../contexts/data-context';
+import { useAuth } from '../contexts/auth-context';
 import {
   addToWatchLater,
   removeFromWatchLater,
@@ -6,12 +7,19 @@ import {
 
 function VideoMenu({ children, toastRef, getData, video, setShowMenu }) {
   const { dataState, dispatch } = useData();
-  console.log(toastRef);
+  const { auth } = useAuth();
+
   const handleCRUD = (func, message, type, funcParam1) => {
-    func(funcParam1, dispatch);
-    toastRef.current.show();
-    getData(message, type);
-    setShowMenu(false);
+    if (auth.isAuth) {
+      func(funcParam1, dispatch);
+      toastRef.current.show();
+      getData(message, type);
+      setShowMenu(false);
+    } else {
+      toastRef.current.show();
+      getData('Login First!!', 'fail');
+      setShowMenu(false);
+    }
   };
 
   const videoPresent = dataState.watchLater?.find(i => i._id === video._id);

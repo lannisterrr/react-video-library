@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { useData } from '../contexts/data-context';
+import { useAuth } from '../contexts/auth-context';
 import { addToLikes, removeFromLikes } from '../utils/like-utils';
 import {
   addToWatchLater,
@@ -9,6 +10,7 @@ import {
 } from '../utils/watchLater-util';
 
 function SingleVideoPage({ toastRef, getData }) {
+  const { auth } = useAuth();
   const { dataState, dispatch } = useData();
   const { videoId } = useParams();
 
@@ -18,9 +20,14 @@ function SingleVideoPage({ toastRef, getData }) {
   const video = getVideoDetails(dataState.videos, videoId);
 
   const handleCRUD = (func, message, type, funcParam1) => {
-    func(funcParam1, dispatch);
-    toastRef.current.show();
-    getData(message, type);
+    if (auth.isAuth) {
+      func(funcParam1, dispatch);
+      toastRef.current.show();
+      getData(message, type);
+    } else {
+      toastRef.current.show();
+      getData('Login First!!', 'fail');
+    }
   };
 
   return (
