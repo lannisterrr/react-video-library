@@ -19,5 +19,8 @@
 .video-lib__add-playlist {
   display: flex;
   flex-direction: column;
-  display: none;
+}
+
+.note__input.modal__input {
+  border: 1px solid var(--grey-color);
 }

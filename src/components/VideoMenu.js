@@ -16,6 +16,12 @@ function VideoMenu({
   const { dataState, dispatch } = useData();
   const { auth } = useAuth();
 
+  const failedLoginPopup = () => {
+    toastRef.current.show();
+    getData('Login First!!', 'fail');
+    setShowMenu(false);
+  };
+
   const handleCRUD = (func, message, type, funcParam1) => {
     if (auth.isAuth) {
       func(funcParam1, dispatch);
@@ -23,15 +29,17 @@ function VideoMenu({
       getData(message, type);
       setShowMenu(false);
     } else {
-      toastRef.current.show();
-      getData('Login First!!', 'fail');
-      setShowMenu(false);
+      failedLoginPopup();
     }
   };
 
   const handleOpenModal = () => {
-    modalRef.current.show();
-    setShowMenu(false);
+    if (auth.isAuth) {
+      modalRef.current.show();
+      setShowMenu(false);
+    } else {
+      failedLoginPopup();
+    }
   };
 
   const videoPresent = dataState.watchLater?.find(i => i._id === video._id);
