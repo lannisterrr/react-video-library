@@ -17,13 +17,12 @@ function PlaylistPage() {
           },
         });
         dispatch({ type: 'GET_PLAYLIST', payload: res.data.playlists });
-        console.log(res.data.playlists);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
-
+  console.log(dataState.playlists);
   return (
     <>
       {dataState.playlists.length === 0 ? (
@@ -32,7 +31,7 @@ function PlaylistPage() {
         <>
           <main className="video-lib__listing-page">
             {dataState.playlists.map(item => (
-              <p className="headin-3">{item.title}</p>
+              <p className="heading-3 center-text">{item.title}</p>
             ))}
           </main>
         </>

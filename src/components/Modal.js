@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   useState,
   useEffect,
@@ -9,57 +10,23 @@ import {
 import { Checkbox } from './Checkbox';
 import { useClickOutside } from '../customHooks/useClickOutside';
 import reactDom from 'react-dom';
+import { playListReducer } from '../reducers/playlist-reducer';
+import { useData } from '../contexts/data-context';
+import { addToPlaylist } from '../utils/playlist-util';
 
 const initialPlaylistState = {
   showPlaylistAdd: false,
   playlistName: '',
   showError: false,
-  userPlaylistArray: [],
   playlistCheckBox: false,
 };
 
-const playListReducer = (state, action) => {
-  switch (action.type) {
-    case 'SHOW_INPUT':
-      return {
-        ...state,
-        showPlaylistAdd: true,
-      };
-
-    case 'SET_PLAYLIST_INPUT':
-      return {
-        ...state,
-        playlistName: action.payload,
-        showError: false,
-      };
-
-    case 'ERROR_SHOW':
-      return {
-        ...state,
-        showError: true,
-      };
-
-    case 'PUSH_TO_PLAYLIST':
-      return {
-        ...state,
-        userPlaylistArray: [...state.userPlaylistArray, state.playlistName],
-        playlistName: '',
-      };
-
-    case 'TOGGLE_CHECKBOX':
-      return {
-        ...state,
-        playlistCheckBox: action.payload,
-      };
-    default:
-      throw new Error(`Unknown action type: ${action.type}`);
-  }
-};
 const Modal = forwardRef((props, ref) => {
   const [playListState, dispatch] = useReducer(
     playListReducer,
     initialPlaylistState
   );
+  const { dataState, dispatch: userDataDispatch } = useData();
   const [modalShow, setModalShow] = useState(false);
   let domNode = useClickOutside(() => hide());
   const hide = () => setModalShow(false);
@@ -70,15 +37,17 @@ const Modal = forwardRef((props, ref) => {
     hide,
   }));
 
-  const handleCreatePlaylist = e => {
-    if (playListState.userPlaylistArray.includes(playListState.playlistName))
-      return;
-
-    playListState.playlistName.length === 0
-      ? dispatch({ type: 'ERROR_SHOW' })
-      : dispatch({ type: 'PUSH_TO_PLAYLIST' });
+  const handleAddToPlayList = () => {
+    const unique = dataState.playlists.find(
+      playlist => playlist.title === playListState.playlistName
+    );
+    if (unique) return;
+    addToPlaylist(playListState.playlistName, userDataDispatch);
+    dispatch({ type: 'INPUT_CLEAR' });
   };
-  console.log(playListState.playlistCheckBox);
+
+  const handleAddVideoToPlaylist = () => {};
+
   return reactDom.createPortal(
     <div
       className={`modal-overlay modal-container z-index-x-l ${
@@ -92,7 +61,7 @@ const Modal = forwardRef((props, ref) => {
         </div>
         <div className="modal-content video-lib__modal-content p-8">
           <Checkbox title="Add to watch Later" />
-          {playListState.userPlaylistArray.map((item, index) => (
+          {dataState.playlists.map((item, index) => (
             <Checkbox
               id={`playlist-checkbox-${index}`}
               handleCheckboxChange={e =>
@@ -101,7 +70,7 @@ const Modal = forwardRef((props, ref) => {
                   payload: e.target.checked,
                 })
               }
-              title={item}
+              title={item.title}
               booleanChecked={playListState.playlistCheckBox}
               name="playlist-checkbox"
             />
@@ -131,7 +100,7 @@ const Modal = forwardRef((props, ref) => {
         <div className="modal-button-container p-4">
           {playListState.showPlaylistAdd ? (
             <button
-              onClick={handleCreatePlaylist}
+              onClick={handleAddToPlayList}
               className="input-field__button"
             >
               + Create
