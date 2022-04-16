@@ -1,7 +1,7 @@
 function Checkbox({ id, title, handleCheckboxChange, booleanChecked, name }) {
   return (
     <>
-      <label htmlFor={id} className="checkbox f-6 p-h-4">
+      <label htmlFor={id} className="checkbox f-6 p-h-4 m-v-2">
         <input
           onChange={handleCheckboxChange}
           className="checkbox__input"

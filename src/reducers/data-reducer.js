@@ -47,6 +47,12 @@ const dataReducer = (state, action) => {
         watchLater: action.payload,
       };
 
+    case 'GET_PLAYLIST':
+      return {
+        ...state,
+        playlist: action.payload,
+      };
+
     default:
       throw new Error(`Unknown action type: ${action.type}`);
   }

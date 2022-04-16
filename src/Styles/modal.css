@@ -14,6 +14,8 @@
   background: var(--bg-primary);
   color: var(--text-secondary);
   border-bottom: 1px solid var(--grey-color);
+  display: flex;
+  flex-direction: column;
 }
 
 .video-lib__add-playlist {
