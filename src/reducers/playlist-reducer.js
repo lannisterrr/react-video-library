@@ -19,12 +19,6 @@ const playListReducer = (state, action) => {
         showError: true,
       };
 
-    case 'TOGGLE_CHECKBOX':
-      return {
-        ...state,
-        playlistCheckBox: action.payload,
-      };
-
     case 'INPUT_CLEAR':
       return {
         ...state,

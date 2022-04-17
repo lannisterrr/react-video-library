@@ -33,23 +33,15 @@ function App() {
   };
   const location = useLocation();
   const toastRef = useRef(null);
-  const modalRef = useRef(null);
   return (
     <div className="App">
       {location.pathname !== '/auth' && <Navbar />}
       <Sidebar />
-      <Modal ref={modalRef} />
       <Toast ref={toastRef} message={toastData.message} type={toastData.type} />
       <Routes>
         <Route
           path="/"
-          element={
-            <Home
-              toastRef={toastRef}
-              getData={getToastProps}
-              modalRef={modalRef}
-            />
-          }
+          element={<Home toastRef={toastRef} getData={getToastProps} />}
         />
         <Route path="/mock" element={<MockmanEs />} />
         <Route

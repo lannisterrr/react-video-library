@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
+import { PlaylistCard } from '../components/PlaylistCard';
 
 function PlaylistPage() {
   const { dataState, dispatch } = useData();
@@ -31,7 +32,7 @@ function PlaylistPage() {
         <>
           <main className="video-lib__listing-page">
             {dataState.playlists.map(item => (
-              <p className="heading-3 center-text">{item.title}</p>
+              <PlaylistCard item={item} />
             ))}
           </main>
         </>

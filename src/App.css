@@ -12,6 +12,7 @@
 @import './Styles/auth.css';
 @import './Styles/toast.css';
 @import './Styles/modal.css';
+@import './Styles/playlist-card.css';
 
 :root {
   font-family: 'Lato', sans-serif;

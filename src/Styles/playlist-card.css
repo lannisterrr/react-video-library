@@ -1,0 +1,8 @@
+.playlist-card__info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-card__info-container * {
+  margin: 0;
+}
