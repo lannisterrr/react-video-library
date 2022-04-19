@@ -47,6 +47,41 @@ const dataReducer = (state, action) => {
         watchLater: action.payload,
       };
 
+    case 'GET_PLAYLIST':
+      return {
+        ...state,
+        playlists: action.payload,
+      };
+
+    case 'CREATE_NEW_PLAYLIST':
+      return {
+        ...state,
+        playlists: action.payload,
+      };
+
+    case 'DELETE_PLAYLIST':
+      return {
+        ...state,
+        playlists: action.payload,
+      };
+
+    case 'ADD_VIDEO_TO_PLAYLIST':
+      const UpdatedPlaylistAfterAdd = state.playlists.map(item =>
+        item._id === action.payload._id ? { ...action.payload } : { ...item }
+      );
+      return {
+        ...state,
+        playlists: UpdatedPlaylistAfterAdd,
+      };
+
+    case 'REMOVE_VIDEO_FROM_PLAYLIST':
+      const UpdatedPlayAfterDelete = state.playlists.map(item =>
+        item._id === action.payload._id ? { ...action.payload } : { ...item }
+      );
+      return {
+        ...state,
+        playlists: UpdatedPlayAfterDelete,
+      };
     default:
       throw new Error(`Unknown action type: ${action.type}`);
   }

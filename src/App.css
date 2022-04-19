@@ -11,6 +11,9 @@
 @import './Styles/singleVideoPage.css';
 @import './Styles/auth.css';
 @import './Styles/toast.css';
+@import './Styles/modal.css';
+@import './Styles/playlist-card.css';
+@import './Styles/singlePlaylistPage.css';
 
 :root {
   font-family: 'Lato', sans-serif;
@@ -121,6 +124,9 @@ body::-webkit-scrollbar-thumb {
     padding: 0.5rem;
     font-size: 1rem;
   }
+  .playlist-delete_button {
+    margin-left: auto;
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -180,5 +186,9 @@ body::-webkit-scrollbar-thumb {
 
   .video-info__title {
     flex: 1;
+  }
+
+  .playlist-header {
+    justify-content: space-around;
   }
 }

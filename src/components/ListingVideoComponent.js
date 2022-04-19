@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useClickOutside } from '../customHooks/useClickOutside';
 import { useNavigate } from 'react-router-dom';
 import { VideoMenu } from './VideoMenu';
 
@@ -7,7 +6,6 @@ function ListingVideoComponent({ video, children, toastRef, getData }) {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const { _id, creator, creatorLogo, thumbnail, title } = video;
-  let domNode = useClickOutside(() => setShowMenu(false));
 
   return (
     <>
@@ -24,7 +22,7 @@ function ListingVideoComponent({ video, children, toastRef, getData }) {
             <span className="f-8 f-bold t-c-1">play</span>
           </figcaption>
         </figure>
-        <div ref={domNode} className="listing-video__info-container p-2">
+        <div className="listing-video__info-container p-2">
           <img src={creatorLogo.url} alt={creatorLogo.altText} />
 
           <p className="f-5 p-1 f-bold">{title}</p>

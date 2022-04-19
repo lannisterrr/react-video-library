@@ -15,6 +15,7 @@ import {
 import RequiresAuth from './components/RequiresAuth';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Toast from './components/Toast';
+import SinglePlaylistPage from './Pages/SinglePlaylistPage';
 
 function App() {
   const [toastData, setToastData] = useState({
@@ -49,6 +50,14 @@ function App() {
           }
         />
         <Route
+          path="/playlist/:playlistID"
+          element={
+            <RequiresAuth>
+              <SinglePlaylistPage />
+            </RequiresAuth>
+          }
+        />
+        <Route
           path="/playlist"
           element={
             <RequiresAuth>
@@ -72,6 +81,7 @@ function App() {
             </RequiresAuth>
           }
         />
+
         <Route
           path="/watchlater"
           element={

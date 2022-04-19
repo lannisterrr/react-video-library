@@ -10,6 +10,7 @@ const initialState = {
   categories: [],
   likes: [],
   watchLater: [],
+  playlists: [],
 };
 
 const DataProvider = ({ children }) => {
