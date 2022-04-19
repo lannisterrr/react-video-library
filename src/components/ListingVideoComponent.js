@@ -1,17 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { VideoMenu } from './VideoMenu';
+import { addToHistory } from '../utils/history-util';
+import { useData } from '../contexts/data-context';
 
 function ListingVideoComponent({ video, children, toastRef, getData }) {
+  const { dispatch } = useData();
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const { _id, creator, creatorLogo, thumbnail, title } = video;
+
+  const handleCardClick = () => {
+    navigate(`/video/${_id}`);
+    addToHistory(video, dispatch);
+  };
 
   return (
     <>
       <div className="listing-video__card">
         <figure
-          onClick={() => navigate(`/video/${_id}`)}
+          onClick={handleCardClick}
           className="listing-video__image-container"
         >
           <img src={thumbnail.url} alt={thumbnail.altText} />

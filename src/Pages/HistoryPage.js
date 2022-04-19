@@ -1,7 +1,72 @@
-import React from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useData } from '../contexts/data-context';
+import { useAuth } from '../contexts/auth-context';
+import { ListingVideoComponent } from '../components/ListingVideoComponent';
+import { clearHistory, removeFromHistory } from '../utils/history-util';
 
 function HistoryPage() {
-  return <main>HistoryPage</main>;
+  const { dataState, dispatch } = useData();
+  const { auth } = useAuth();
+
+  useEffect(() => {
+    if (!auth.isAuth) return;
+    (async () => {
+      try {
+        const res = await axios.get('/api/user/history', {
+          headers: {
+            authorization: localStorage.getItem('token'),
+          },
+        });
+        dispatch({ type: 'GET_HISTORY', payload: res.data.history });
+        console.log(res.data.history);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  const handleDeleteFromHistory = videoId => {
+    removeFromHistory(videoId, dispatch);
+  };
+
+  const handleClearHistory = () => {
+    clearHistory(dispatch);
+  };
+
+  return (
+    <>
+      {dataState.history.length === 0 ? (
+        <main className="center-text f-8 f-bold">
+          Watch videos to see in the historyy!!
+        </main>
+      ) : (
+        <>
+          <div className="playlist-header">
+            <button
+              onClick={handleClearHistory}
+              class="btn btn-danger t-c-1 m-l-auto playlist-delete_button"
+            >
+              Clear History
+            </button>
+          </div>
+          <main className="video-lib__listing-page">
+            {dataState.history.map(item => (
+              <ListingVideoComponent key={item._id} video={item}>
+                <span
+                  onClick={() => handleDeleteFromHistory(item._id)}
+                  className="f-6 w-100 menu-item pointer"
+                >
+                  <i className="fa-solid fa-trash  f-8 p-h-2"></i>
+                  Remove from history
+                </span>
+              </ListingVideoComponent>
+            ))}
+          </main>
+        </>
+      )}
+    </>
+  );
 }
 
 export { HistoryPage };
