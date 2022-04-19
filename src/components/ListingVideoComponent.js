@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useClickOutside } from '../customHooks/useClickOutside';
 import { useNavigate } from 'react-router-dom';
 import { VideoMenu } from './VideoMenu';
 
@@ -7,7 +6,6 @@ function ListingVideoComponent({ video, children, toastRef, getData }) {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const { _id, creator, creatorLogo, thumbnail, title } = video;
-  // let domNode = useClickOutside(() => setShowMenu(false));
 
   return (
     <>

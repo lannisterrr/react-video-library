@@ -3,15 +3,18 @@ import { useClickOutside } from '../customHooks/useClickOutside';
 import reactDom from 'react-dom';
 import { useData } from '../contexts/data-context';
 import { usePlaylist } from '../contexts/playlist-context';
-import { createPlaylist, addToPlaylist } from '../utils/playlist-util';
+import {
+  createPlaylist,
+  addToPlaylist,
+  deleteFromPlaylist,
+} from '../utils/playlist-util';
+import { useLocation } from 'react-router-dom';
 
-const Modal = ({ setShowModal, video }) => {
+const Modal = ({ setShowModal, video, toastRef, getData, setShowMenu }) => {
   const { playListState, dispatch: playListDispatch } = usePlaylist();
   const { dataState, dispatch: userDataDispatch } = useData();
-
-  // let domNode = useClickOutside(() =>
-  //   playListDispatch({ type: 'HIDE_MODAL', payload: true })
-  // );
+  const location = useLocation();
+  let domNode = useClickOutside(() => setShowModal(false));
 
   const handleCreatePlaylist = () => {
     if (!playListState.playlistName.length > 0) {
@@ -26,9 +29,23 @@ const Modal = ({ setShowModal, video }) => {
     playListDispatch({ type: 'INPUT_CLEAR' });
   };
 
+  const handlePlaylistCRUD = (e, item) => {
+    if (e.target.checked) {
+      addToPlaylist(item._id, video, userDataDispatch);
+      setShowModal(false);
+      toastRef.current.show();
+      getData('video added to playlist!', 'success');
+    } else {
+      deleteFromPlaylist(item._id, video._id, userDataDispatch);
+      setShowModal(false);
+      toastRef.current.show();
+      getData('video deleted from playlist', 'fail');
+    }
+  };
+
   return reactDom.createPortal(
     <div className="modal-overlay modal-container z-index-x-l show-modal">
-      <div className="modal video-lib__modal-container">
+      <div ref={domNode} className="modal video-lib__modal-container">
         <div className="modal-header video-lib__modal-header p-2">
           <h3 className="heading-4 p-h-2">save to...</h3>
           <i
@@ -43,15 +60,14 @@ const Modal = ({ setShowModal, video }) => {
               let isVideoInPlaylist = item.videos.some(
                 i_video => i_video._id === video._id
               );
+              console.log(isVideoInPlaylist);
               return (
                 <Checkbox
                   key={item._id}
+                  defaultChecked={isVideoInPlaylist}
                   id={`playlist-checkbox-${index + 1}`}
                   title={item.title}
-                  handleCheckboxChange={() =>
-                    addToPlaylist(item._id, video, userDataDispatch)
-                  }
-                  booleanChecked={isVideoInPlaylist}
+                  handleCheckboxChange={e => handlePlaylistCRUD(e, item)}
                 />
               );
             })}

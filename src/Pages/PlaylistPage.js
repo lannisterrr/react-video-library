@@ -7,7 +7,6 @@ import { PlaylistCard } from '../components/PlaylistCard';
 function PlaylistPage() {
   const { dataState, dispatch } = useData();
   const { auth } = useAuth();
-
   useEffect(() => {
     if (!auth.isAuth) return;
     (async () => {
@@ -23,7 +22,7 @@ function PlaylistPage() {
       }
     })();
   }, []);
-  console.log(dataState.playlists);
+
   return (
     <>
       {dataState.playlists.length === 0 ? (
@@ -32,7 +31,7 @@ function PlaylistPage() {
         <>
           <main className="video-lib__listing-page">
             {dataState.playlists.map(item => (
-              <PlaylistCard item={item} />
+              <PlaylistCard key={item._id} item={item} />
             ))}
           </main>
         </>

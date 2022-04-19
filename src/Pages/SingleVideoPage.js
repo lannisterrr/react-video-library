@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { useData } from '../contexts/data-context';
@@ -10,7 +10,8 @@ import {
   removeFromWatchLater,
 } from '../utils/watchLater-util';
 
-function SingleVideoPage({ toastRef, getData, modalRef }) {
+function SingleVideoPage({ toastRef, getData }) {
+  const [showModal, setShowModal] = useState(false);
   const { auth } = useAuth();
   const { dataState, dispatch } = useData();
   const { videoId } = useParams();
@@ -33,7 +34,7 @@ function SingleVideoPage({ toastRef, getData, modalRef }) {
 
   const handleOpenModal = () => {
     if (auth.isAuth) {
-      modalRef.current.show(); // modal show
+      setShowModal(true); // modal show
     } else {
       toastRef.current.show();
       getData('Login First!!', 'fail');
@@ -42,13 +43,11 @@ function SingleVideoPage({ toastRef, getData, modalRef }) {
   console.log(video, 'in single video page');
   return (
     <>
-      <Modal videoId={videoId} />
       <main className="single-videoPage__wrapper">
         <div className="video-content">
           <div className="video-container">
             <ReactPlayer
               className="react-player"
-              playing
               controls
               url={`https://www.youtube.com/watch?v=${video.videoYTId}`}
               width="100%"
@@ -160,6 +159,14 @@ function SingleVideoPage({ toastRef, getData, modalRef }) {
           </div>
         </div>
       </main>
+      {showModal && (
+        <Modal
+          video={video}
+          setShowModal={setShowModal}
+          toastRef={toastRef}
+          getData={getData}
+        />
+      )}
     </>
   );
 }

@@ -1,0 +1,13 @@
+.playlist-header {
+  background: var(--bg-primary);
+  display: flex;
+  padding: 1rem;
+}
+
+.playlist-title {
+  margin: 0;
+}
+
+.playlist-delete_button {
+  border: none;
+}

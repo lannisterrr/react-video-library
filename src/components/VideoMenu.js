@@ -6,13 +6,16 @@ import {
   removeFromWatchLater,
 } from '../utils/watchLater-util';
 import { usePlaylist } from '../contexts/playlist-context';
+import { useClickOutside } from '../customHooks/useClickOutside';
+
 import { Modal } from './Modal';
 
 function VideoMenu({ children, toastRef, getData, video, setShowMenu }) {
+  const [showModal, setShowModal] = useState(false);
+  // let domNode = useClickOutside(() => setShowMenu(false));
   const { dataState, dispatch } = useData();
   const { auth } = useAuth();
   const { playListState, dispatch: playListDispatch } = usePlaylist();
-  const [showModal, setShowModal] = useState(false);
   const failedLoginPopup = () => {
     toastRef.current.show();
     getData('Login First!!', 'fail');
@@ -37,7 +40,6 @@ function VideoMenu({ children, toastRef, getData, video, setShowMenu }) {
       failedLoginPopup();
     }
   };
-  console.log(showModal);
   const videoPresent = dataState.watchLater?.find(i => i._id === video._id);
 
   return (
@@ -71,7 +73,15 @@ function VideoMenu({ children, toastRef, getData, video, setShowMenu }) {
         </span>
         {children}
       </div>
-      {showModal && <Modal setShowModal={setShowModal} video={video} />}
+      {showModal && (
+        <Modal
+          toastRef={toastRef}
+          getData={getData}
+          setShowModal={setShowModal}
+          video={video}
+          setShowMenu={setShowMenu}
+        />
+      )}
     </>
   );
 }
