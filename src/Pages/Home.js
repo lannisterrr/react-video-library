@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 
 import { useData } from '../contexts/data-context';
+import { useFilter } from '../contexts/filter-context';
 
 function Home({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
-  const [finalArray, setFinalArray] = useState(dataState.videos);
+  const { finalArray, setFinalArray } = useFilter();
   const [allActive, setAllActive] = useState(true);
   useEffect(() => {
     (async () => {
@@ -30,6 +31,10 @@ function Home({ toastRef, getData }) {
     })();
   }, []);
 
+  useEffect(() => {
+    setFinalArray(dataState.videos);
+  }, [dataState.videos]);
+
   const allSelect = () => {
     dispatch({ type: 'SELECTED_CATEGORY', payload: '' });
     setFinalArray(dataState.videos);
@@ -45,10 +50,6 @@ function Home({ toastRef, getData }) {
     setFinalArray(res);
   };
 
-  useEffect(() => {
-    setFinalArray(dataState.videos);
-  }, [dataState.videos]);
-
   return (
     <>
       <div className="video-lib__filters-container z-index-md">
@@ -59,7 +60,6 @@ function Home({ toastRef, getData }) {
           All
         </button>
         {dataState.categories.map(category => {
-          console.log(category.isActive);
           return (
             <button
               onClick={() => categorySelect(category, dataState.videos)}
