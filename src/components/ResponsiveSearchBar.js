@@ -5,14 +5,15 @@ import { useData } from '../contexts/data-context';
 function ResponsiveSearchBar() {
   const { searchValue, setSearchValue, searchedRecipe } = useFilter();
 
-  useEffect(() => {
+  const handleRecipeInput = e => {
+    setSearchValue(e.target.value);
     searchedRecipe(searchValue);
-  }, [searchValue]);
+  };
   return (
     <div className="search-bar">
       <input
         type="text"
-        onChange={e => setSearchValue(e.target.value)}
+        onChange={handleRecipeInput}
         className="search-bar__input t-c-1"
         placeholder="Search..."
         value={searchValue}
