@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/auth-context';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { clearHistory, removeFromHistory } from '../utils/history-util';
 
-function HistoryPage() {
+function HistoryPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
   const { auth } = useAuth();
 
@@ -28,10 +28,14 @@ function HistoryPage() {
 
   const handleDeleteFromHistory = videoId => {
     removeFromHistory(videoId, dispatch);
+    toastRef.current.show();
+    getData('Video Deleted from history', 'fail');
   };
 
   const handleClearHistory = () => {
     clearHistory(dispatch);
+    toastRef.current.show();
+    getData('History cleared', 'fail');
   };
 
   return (

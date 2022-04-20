@@ -69,7 +69,7 @@ function App() {
           path="/history"
           element={
             <RequiresAuth>
-              <HistoryPage />
+              <HistoryPage toastRef={toastRef} getData={getToastProps}/>
             </RequiresAuth>
           }
         />
