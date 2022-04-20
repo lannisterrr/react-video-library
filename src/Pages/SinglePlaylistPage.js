@@ -2,6 +2,7 @@ import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useData } from '../contexts/data-context';
 import { deletePlaylist, deleteFromPlaylist } from '../utils/playlist-util';
+
 import { useEffect } from 'react';
 function SinglePlaylistPage() {
   const navigate = useNavigate();

@@ -5,6 +5,7 @@ import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { Modal } from '../components/Modal';
 import { addToLikes, removeFromLikes } from '../utils/like-utils';
+
 import {
   addToWatchLater,
   removeFromWatchLater,
@@ -40,7 +41,6 @@ function SingleVideoPage({ toastRef, getData }) {
       getData('Login First!!', 'fail');
     }
   };
-  console.log(video, 'in single video page');
   return (
     <>
       <main className="single-videoPage__wrapper">
@@ -48,6 +48,7 @@ function SingleVideoPage({ toastRef, getData }) {
           <div className="video-container">
             <ReactPlayer
               className="react-player"
+              playing
               controls
               url={`https://www.youtube.com/watch?v=${video.videoYTId}`}
               width="100%"

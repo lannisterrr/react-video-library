@@ -82,6 +82,31 @@ const dataReducer = (state, action) => {
         ...state,
         playlists: UpdatedPlayAfterDelete,
       };
+
+    case 'GET_HISTORY':
+      return {
+        ...state,
+        history: action.payload,
+      };
+
+    case 'ADD_TO_HISTORY':
+      return {
+        ...state,
+        history: action.payload,
+      };
+
+    case 'REMOVE_FROM_HISTORY':
+      return {
+        ...state,
+        history: action.payload,
+      };
+
+    case 'CLEAR_HISTORY':
+      return {
+        ...state,
+        history: action.payload,
+      };
+
     default:
       throw new Error(`Unknown action type: ${action.type}`);
   }
