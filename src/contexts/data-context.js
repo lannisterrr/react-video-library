@@ -13,7 +13,6 @@ const initialState = {
   playlists: [],
   history: [],
 };
-console.log(initialState.history);
 
 const DataProvider = ({ children }) => {
   const [dataState, dispatch] = useReducer(dataReducer, initialState);
