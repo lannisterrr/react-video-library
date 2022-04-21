@@ -5,10 +5,28 @@ const dataReducer = (state, action) => {
         ...state,
         videos: action.payload,
       };
+
+    case 'FILTERED_VIDEOS':
+      return {
+        ...state,
+        videos: action.payload,
+      };
+
     case 'GET_CATEGORIES':
       return {
         ...state,
         categories: action.payload,
+      };
+
+    case 'SELECTED_CATEGORY':
+      const updatedCategories = state.categories.map(category => {
+        return category._id === action.payload._id
+          ? { ...category, isActive: true }
+          : { ...category, isActive: false };
+      });
+      return {
+        ...state,
+        categories: updatedCategories,
       };
 
     case 'GET_LIKES':

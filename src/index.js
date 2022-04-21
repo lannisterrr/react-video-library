@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { DataProvider } from './contexts/data-context';
 import { AuthProvider } from './contexts/auth-context';
 import { PlaylistProvider } from './contexts/playlist-context';
+import { FilterProvider } from './contexts/filter-context';
 // Call make Server
 makeServer();
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,7 +17,9 @@ root.render(
       <DataProvider>
         <AuthProvider>
           <PlaylistProvider>
-            <App />
+            <FilterProvider>
+              <App />
+            </FilterProvider>
           </PlaylistProvider>
         </AuthProvider>
       </DataProvider>

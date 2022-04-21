@@ -1,11 +1,14 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 
 import { useData } from '../contexts/data-context';
+import { useFilter } from '../contexts/filter-context';
 
 function Home({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
+  const { finalArray, setFinalArray } = useFilter();
+  const [allActive, setAllActive] = useState(true);
   useEffect(() => {
     (async () => {
       try {
@@ -28,24 +31,58 @@ function Home({ toastRef, getData }) {
     })();
   }, []);
 
+  useEffect(() => {
+    setFinalArray(dataState.videos);
+  }, [dataState.videos]);
+
+  const allSelect = () => {
+    dispatch({ type: 'SELECTED_CATEGORY', payload: '' });
+    setFinalArray(dataState.videos);
+    setAllActive(!allActive);
+  };
+
+  const categorySelect = (userClickedCategory, allVideos) => {
+    dispatch({ type: 'SELECTED_CATEGORY', payload: userClickedCategory });
+    setAllActive(false);
+    const res = allVideos.filter(
+      video => video.categoryName === userClickedCategory.categoryName
+    );
+    setFinalArray(res);
+  };
+
   return (
     <>
       <div className="video-lib__filters-container z-index-md">
-        {dataState.categories.map(category => (
-          <button key={category._id} className="video-lib__filter m-h-3">
-            {category.categoryName}
-          </button>
-        ))}
+        <button
+          onClick={allSelect}
+          className={`video-lib__filter m-h-3 ${allActive && 'filter-active'}`}
+        >
+          All
+        </button>
+        {dataState.categories.map(category => {
+          return (
+            <button
+              onClick={() => categorySelect(category, dataState.videos)}
+              key={category._id}
+              className={`video-lib__filter m-h-3 ${
+                category.isActive && 'filter-active'
+              }`}
+            >
+              {category.categoryName}
+            </button>
+          );
+        })}
       </div>
       <main className="video-lib__listing-page">
-        {dataState.videos.map(video => (
-          <ListingVideoComponent
-            key={video._id}
-            video={video}
-            toastRef={toastRef}
-            getData={getData}
-          />
-        ))}
+        {finalArray &&
+          finalArray.map(video => (
+            <ListingVideoComponent
+              key={video._id}
+              video={video}
+              toastRef={toastRef}
+              getData={getData}
+            />
+          ))}
       </main>
     </>
   );
