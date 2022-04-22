@@ -5,7 +5,7 @@ import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { Modal } from '../components/Modal';
 import { addToLikes, removeFromLikes } from '../utils/like-utils';
-
+import { addToHistory } from '../utils/history-util';
 import {
   addToWatchLater,
   removeFromWatchLater,
@@ -56,6 +56,7 @@ function SingleVideoPage({ toastRef, getData }) {
               width="100%"
               height="100%"
               ref={videoRef}
+              onPlay={() => addToHistory(video, dispatch)}
             />
           </div>
           <div className="video-info-container">
