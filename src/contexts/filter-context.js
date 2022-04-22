@@ -10,12 +10,12 @@ const FilterProvider = ({ children }) => {
   const [searchValue, setSearchValue] = useState('');
   const [finalArray, setFinalArray] = useState(data);
 
-  const searchedRecipe = (searchValue, data) => {
+  const searchedRecipe = searchValue => {
     const VideosAfterSearch = searchValue
-      ? dataState.videos.filter(item =>
+      ? finalArray.filter(item =>
           item.title.toLowerCase().includes(searchValue.toLowerCase())
         )
-      : dataState.videos;
+      : finalArray;
     setFinalArray(VideosAfterSearch);
   };
 
