@@ -69,7 +69,8 @@
 }
 
 .input-field__button-container {
-  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .note__input-textarea {

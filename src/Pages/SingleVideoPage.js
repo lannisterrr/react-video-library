@@ -117,7 +117,7 @@ function SingleVideoPage({ toastRef, getData }) {
           </div>
           <p className="f-6">{video.description}</p>
         </div>
-        <Notes videoRef={videoRef} />
+        <Notes videoRef={videoRef} videoId={videoId} />
       </main>
       {showModal && (
         <Modal

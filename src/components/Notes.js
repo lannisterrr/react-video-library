@@ -15,16 +15,17 @@ const initialState = {
   ],
   title: '',
   textArea: '',
+  errorShow: false,
 };
 
-function Notes({ videoRef }) {
-  console.log(videoRef.current);
+function Notes({ videoRef, videoId }) {
   const notesReducer = (state, action) => {
     switch (action.type) {
       case 'TEXT_INPUT':
         return {
           ...state,
           [action.payload.key]: action.payload.value,
+          errorShow: false,
         };
 
       case 'SAVE_NOTES':
@@ -33,12 +34,32 @@ function Notes({ videoRef }) {
           notes: [
             ...state.notes,
             {
-              _id: uuid(),
+              _id: videoId,
               title: state.title,
               description: state.textArea,
-              videoTimeStamp: action.payload,
+              videoTimeStamp: videoRef.current.getCurrentTime(),
             },
           ],
+          title: '',
+          textArea: '',
+        };
+
+      case 'CLEAR_INPUT':
+        return initialState;
+
+      case 'ERROR_SHOW':
+        return {
+          ...state,
+          errorShow: true,
+        };
+
+      case 'DELETE_NOTES':
+        const filteredNotes = state.notes.filter(
+          note => note._id !== action.payload
+        );
+        return {
+          ...state,
+          notes: filteredNotes,
         };
 
       default:
@@ -46,6 +67,16 @@ function Notes({ videoRef }) {
     }
   };
   const [notesState, dispatch] = useReducer(notesReducer, initialState);
+
+  const handleAddNotes = () => {
+    if (!notesState.title.length || !notesState.textArea.length) {
+      dispatch({ type: 'ERROR_SHOW' });
+    } else {
+      dispatch({
+        type: 'SAVE_NOTES',
+      });
+    }
+  };
 
   return (
     <div className="single-video__notes-container">
@@ -78,23 +109,26 @@ function Notes({ videoRef }) {
           value={notesState.textArea}
           className="note__input note__input-textarea"
         ></textarea>
-        <div className="input-field__button-container">
+        <div className="input-field__button-container p-v-4">
+          {notesState.errorShow && (
+            <p className="f-5 t-c-3 f-bold m-r-auto">Field is Empty</p>
+          )}
           <button
-            onClick={() =>
-              dispatch({
-                type: 'SAVE_NOTES',
-                payload: videoRef.current.getCurrentTime(),
-              })
-            }
-            className="input-field__button m-h-4"
+            onClick={handleAddNotes}
+            className="input-field__button  m-h-4"
           >
             Save
           </button>
-          <button className="input-field__button">Discard</button>
+          <button
+            onClick={() => dispatch({ type: 'CLEAR_INPUT' })}
+            className="input-field__button "
+          >
+            Discard
+          </button>
         </div>
       </div>
       {notesState.notes.map(note => (
-        <UserNote key={note._id} note={note} />
+        <UserNote key={note._id} note={note} dispatch={dispatch} />
       ))}
     </div>
   );
