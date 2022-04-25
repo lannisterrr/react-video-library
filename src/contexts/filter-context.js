@@ -9,13 +9,16 @@ const FilterProvider = ({ children }) => {
   const data = dataState.videos;
   const [searchValue, setSearchValue] = useState('');
   const [finalArray, setFinalArray] = useState(data);
-
-  const searchedRecipe = searchValue => {
-    const VideosAfterSearch = searchValue
-      ? finalArray.filter(item =>
-          item.title.toLowerCase().includes(searchValue.toLowerCase())
-        )
-      : finalArray;
+  console.log(finalArray);
+  const searchedVideo = searchValue => {
+    console.log(searchValue.length);
+    const VideosAfterSearch =
+      searchValue.length > 1
+        ? finalArray.filter(item =>
+            item.title.toLowerCase().includes(searchValue.toLowerCase())
+          )
+        : data;
+    console.log(VideosAfterSearch);
     setFinalArray(VideosAfterSearch);
   };
 
@@ -24,7 +27,7 @@ const FilterProvider = ({ children }) => {
     setSearchValue,
     finalArray,
     setFinalArray,
-    searchedRecipe,
+    searchedVideo,
   };
   return (
     <filterContext.Provider value={contextValue}>

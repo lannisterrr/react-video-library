@@ -1,13 +1,11 @@
-import { useEffect } from 'react';
 import { useFilter } from '../contexts/filter-context';
-import { useData } from '../contexts/data-context';
 
 function ResponsiveSearchBar() {
-  const { searchValue, setSearchValue, searchedRecipe } = useFilter();
+  const { searchValue, setSearchValue, searchedVideo } = useFilter();
 
   const handleRecipeInput = e => {
     setSearchValue(e.target.value);
-    searchedRecipe(searchValue);
+    searchedVideo(searchValue);
   };
   return (
     <div className="search-bar">
