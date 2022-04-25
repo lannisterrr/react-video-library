@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ReactPlayer from 'react-player';
+import ReactPlayer from 'react-player/youtube';
 import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { Modal } from '../components/Modal';
 import { addToLikes, removeFromLikes } from '../utils/like-utils';
-
+import { addToHistory } from '../utils/history-util';
 import {
   addToWatchLater,
   removeFromWatchLater,
@@ -17,6 +17,7 @@ function SingleVideoPage({ toastRef, getData }) {
   const { auth } = useAuth();
   const { dataState, dispatch } = useData();
   const { videoId } = useParams();
+  const videoRef = useRef();
 
   function getVideoDetails(videos, videoId) {
     return videos.find(video => video._id === videoId);
@@ -42,6 +43,7 @@ function SingleVideoPage({ toastRef, getData }) {
       getData('Login First!!', 'fail');
     }
   };
+
   return (
     <>
       <main className="single-videoPage__wrapper">
@@ -49,11 +51,12 @@ function SingleVideoPage({ toastRef, getData }) {
           <div className="video-container">
             <ReactPlayer
               className="react-player"
-              playing
               controls
               url={`https://www.youtube.com/watch?v=${video.videoYTId}`}
               width="100%"
               height="100%"
+              ref={videoRef}
+              onPlay={() => addToHistory(video, dispatch)}
             />
           </div>
           <div className="video-info-container">
@@ -115,7 +118,7 @@ function SingleVideoPage({ toastRef, getData }) {
           </div>
           <p className="f-6">{video.description}</p>
         </div>
-        <Notes />
+        <Notes videoRef={videoRef} videoId={videoId} />
       </main>
       {showModal && (
         <Modal

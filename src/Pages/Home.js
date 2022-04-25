@@ -42,6 +42,7 @@ function Home({ toastRef, getData }) {
   };
 
   const categorySelect = (userClickedCategory, allVideos) => {
+    // setCategory(userClickedCategory);
     dispatch({ type: 'SELECTED_CATEGORY', payload: userClickedCategory });
     setAllActive(false);
     const res = allVideos.filter(
@@ -67,6 +68,7 @@ function Home({ toastRef, getData }) {
               className={`video-lib__filter m-h-3 ${
                 category.isActive && 'filter-active'
               }`}
+              // category === selectedCategory && 'filter-active'
             >
               {category.categoryName}
             </button>

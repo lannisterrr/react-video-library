@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { makeServer } from './server';
@@ -8,10 +9,8 @@ import { DataProvider } from './contexts/data-context';
 import { AuthProvider } from './contexts/auth-context';
 import { PlaylistProvider } from './contexts/playlist-context';
 import { FilterProvider } from './contexts/filter-context';
-// Call make Server
 makeServer();
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <DataProvider>
@@ -24,5 +23,6 @@ root.render(
         </AuthProvider>
       </DataProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
