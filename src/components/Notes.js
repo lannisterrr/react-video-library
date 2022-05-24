@@ -34,7 +34,7 @@ function Notes({ videoRef, videoId }) {
           notes: [
             ...state.notes,
             {
-              _id: videoId,
+              _id: uuid(),
               title: state.title,
               description: state.textArea,
               videoTimeStamp: videoRef.current.getCurrentTime(),

@@ -72,6 +72,7 @@ const dataReducer = (state, action) => {
       };
 
     case 'CREATE_NEW_PLAYLIST':
+      console.log(state.playlists);
       return {
         ...state,
         playlists: action.payload,

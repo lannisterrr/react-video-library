@@ -1,9 +1,18 @@
 import { useNavigate } from 'react-router-dom';
+import { useData } from '../contexts/data-context';
+import { deletePlaylist } from '../utils/playlist-util';
 
 function PlaylistCard({ item }) {
+  const { dispatch } = useData();
+
   const navigate = useNavigate();
   const { _id } = item;
   console.log(_id);
+
+  const handleDeletePlaylist = () => {
+    deletePlaylist(_id, dispatch);
+  };
+
   return (
     <>
       {item.videos.length > 0 ? (
@@ -24,8 +33,11 @@ function PlaylistCard({ item }) {
           </figure>
           <div className="playlist-card__info-container">
             <p className="f-8 p-2 f-bold">{item.title}</p>
-            <p className="f-6 p-h-2 f-bold video-lib-text-1">
-              view full playlist
+            <p
+              onClick={handleDeletePlaylist}
+              className="f-6 p-h-2 f-bold video-lib-text-1 pointer"
+            >
+              Delete this Playlist
             </p>
           </div>
         </div>
