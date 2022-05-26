@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { PlaylistCard } from '../components/PlaylistCard';
+import { Helmet } from 'react-helmet';
 
 function PlaylistPage() {
   const { dataState, dispatch } = useData();
@@ -25,6 +26,9 @@ function PlaylistPage() {
 
   return (
     <>
+      <Helmet>
+        <title>Playlist</title>
+      </Helmet>
       {dataState.playlists.length === 0 ? (
         <main className="center-text f-8 f-bold">No playlists added</main>
       ) : (

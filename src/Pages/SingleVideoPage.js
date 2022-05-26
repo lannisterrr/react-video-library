@@ -11,6 +11,7 @@ import {
   removeFromWatchLater,
 } from '../utils/watchLater-util';
 import { Notes } from '../components/Notes';
+import { Helmet } from 'react-helmet';
 
 function SingleVideoPage({ toastRef, getData }) {
   const [showModal, setShowModal] = useState(false);
@@ -46,6 +47,9 @@ function SingleVideoPage({ toastRef, getData }) {
 
   return (
     <>
+      <Helmet>
+        <title>Video</title>
+      </Helmet>
       <main className="single-videoPage__wrapper">
         <div className="video-content">
           <div className="video-container">

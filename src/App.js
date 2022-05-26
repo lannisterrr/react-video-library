@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import MockmanEs from 'mockman-js';
+import { Helmet } from 'react-helmet';
+
 import {
   Home,
   SingleVideoPage,
@@ -34,6 +36,12 @@ function App() {
   const toastRef = useRef(null);
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Psychology Tube</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+        <meta name="description" content="Video librarys" />
+      </Helmet>
       {location.pathname !== '/auth' && <Navbar />}
       <Sidebar />
       <Toast ref={toastRef} message={toastData.message} type={toastData.type} />

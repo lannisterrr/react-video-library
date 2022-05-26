@@ -2,6 +2,7 @@ import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useData } from '../contexts/data-context';
 import { deletePlaylist, deleteFromPlaylist } from '../utils/playlist-util';
+import { Helmet } from 'react-helmet';
 
 import { useEffect } from 'react';
 function SinglePlaylistPage() {
@@ -31,6 +32,9 @@ function SinglePlaylistPage() {
 
   return (
     <>
+      <Helmet>
+        <title>{playlist.title}</title>
+      </Helmet>
       <div className="playlist-header">
         <p className="heading-3 t-c-3 center-text playlist-title">
           Playlist Name : ({playlist.title})

@@ -4,6 +4,7 @@ import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { removeFromLikes } from '../utils/like-utils';
+import { Helmet } from 'react-helmet';
 
 function LikePage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
@@ -33,6 +34,9 @@ function LikePage({ toastRef, getData }) {
 
   return (
     <>
+      <Helmet>
+        <title>Liked Videos</title>
+      </Helmet>
       {dataState.likes.length === 0 ? (
         <main className="center-text f-8 f-bold">No likes added</main>
       ) : (

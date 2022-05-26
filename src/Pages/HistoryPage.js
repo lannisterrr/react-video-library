@@ -4,6 +4,7 @@ import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { clearHistory, removeFromHistory } from '../utils/history-util';
+import { Helmet } from 'react-helmet';
 
 function HistoryPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
@@ -40,6 +41,9 @@ function HistoryPage({ toastRef, getData }) {
 
   return (
     <>
+      <Helmet>
+        <title>History</title>
+      </Helmet>
       {dataState.history.length === 0 ? (
         <main className="center-text f-8 f-bold">
           Watch videos to see in the historyy!!
