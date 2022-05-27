@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { Checkbox } from './Checkbox';
 import { useClickOutside } from '../customHooks/useClickOutside';
 import reactDom from 'react-dom';
 import { useData } from '../contexts/data-context';
 import { usePlaylist } from '../contexts/playlist-context';
+import { useAuth } from '../contexts/auth-context';
 import {
   createPlaylist,
   addToPlaylist,
@@ -14,13 +14,13 @@ import { useLocation } from 'react-router-dom';
 const Modal = ({ setShowModal, video, toastRef, getData, setShowMenu }) => {
   const { playListState, dispatch: playListDispatch } = usePlaylist();
   const { dataState, dispatch: userDataDispatch } = useData();
+  const { auth } = useAuth();
   let playObjId = null;
   console.log(playObjId);
   const location = useLocation();
   let domNode = useClickOutside(() => setShowModal(false));
 
   const handleCreatePlaylist = () => {
-    console.log(dataState.playlists);
     if (!playListState.playlistName.length > 0) {
       playListDispatch({ type: 'ERROR_SHOW' });
       return;
@@ -30,7 +30,7 @@ const Modal = ({ setShowModal, video, toastRef, getData, setShowMenu }) => {
     );
     if (notUnique) return;
 
-    createPlaylist(playListState.playlistName, userDataDispatch);
+    createPlaylist(playListState.playlistName, userDataDispatch, auth.token);
     playListDispatch({ type: 'INPUT_CLEAR' });
 
     // addToPlaylist(playObjId, video, userDataDispatch);
@@ -38,12 +38,12 @@ const Modal = ({ setShowModal, video, toastRef, getData, setShowMenu }) => {
 
   const handlePlaylistCRUD = (e, item) => {
     if (e.target.checked) {
-      addToPlaylist(item._id, video, userDataDispatch);
+      addToPlaylist(item._id, video, userDataDispatch, auth.token);
       setShowModal(false);
       toastRef.current.show();
       getData('video added to playlist!', 'success');
     } else {
-      deleteFromPlaylist(item._id, video._id, userDataDispatch);
+      deleteFromPlaylist(item._id, video._id, userDataDispatch, auth.token);
       setShowModal(false);
       toastRef.current.show();
       getData('video deleted from playlist', 'fail');

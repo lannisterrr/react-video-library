@@ -24,7 +24,7 @@ function VideoMenu({ children, toastRef, getData, video, setShowMenu }) {
 
   const handleCRUD = (func, message, type, funcParam1) => {
     if (auth.isAuth) {
-      func(funcParam1, dispatch);
+      func(funcParam1, dispatch, auth.token);
       toastRef.current.show();
       getData(message, type);
       setShowMenu(false);

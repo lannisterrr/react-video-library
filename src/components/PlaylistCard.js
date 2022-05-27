@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useData } from '../contexts/data-context';
 import { deletePlaylist } from '../utils/playlist-util';
 
-function PlaylistCard({ item }) {
+function PlaylistCard({ item, auth }) {
   const { dispatch } = useData();
 
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ function PlaylistCard({ item }) {
   console.log(_id);
 
   const handleDeletePlaylist = () => {
-    deletePlaylist(_id, dispatch);
+    deletePlaylist(_id, dispatch, auth.token);
   };
 
   const emptyPlaylistImage = 'http://i3.ytimg.com/vi/5y2GTQ9jLbw/hqdefault.jpg';

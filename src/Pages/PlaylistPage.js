@@ -4,7 +4,6 @@ import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { PlaylistCard } from '../components/PlaylistCard';
 import { Helmet } from 'react-helmet';
-
 function PlaylistPage() {
   const { dataState, dispatch } = useData();
   const { auth } = useAuth();
@@ -35,7 +34,7 @@ function PlaylistPage() {
         <>
           <main className="video-lib__listing-page">
             {dataState.playlists.map(item => (
-              <PlaylistCard key={item._id} item={item} />
+              <PlaylistCard key={item._id} item={item} auth={auth} />
             ))}
           </main>
         </>

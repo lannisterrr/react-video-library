@@ -3,9 +3,10 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useData } from '../contexts/data-context';
 import { deletePlaylist, deleteFromPlaylist } from '../utils/playlist-util';
 import { Helmet } from 'react-helmet';
+import { useAuth } from '../contexts/auth-context';
 
-import { useEffect } from 'react';
 function SinglePlaylistPage() {
+  const { auth } = useAuth();
   const navigate = useNavigate();
   const { dataState, dispatch } = useData();
   const { playlistID } = useParams();
@@ -15,19 +16,13 @@ function SinglePlaylistPage() {
   }
   const playlist = getPlaylistDetails(dataState.playlists, playlistID);
 
-  useEffect(() => {
-    if (playlist.videos.length === 0) {
-      navigate('/playlist');
-    }
-  }, [playlist.videos]);
-
   const handleDeletePlaylist = () => {
-    deletePlaylist(playlistID, dispatch);
+    deletePlaylist(playlistID, dispatch, auth.token);
     navigate('/playlist');
   };
 
   const handleVideoDeleteFromPlaylist = videoId => {
-    deleteFromPlaylist(playlistID, videoId, dispatch);
+    deleteFromPlaylist(playlistID, videoId, dispatch, auth.token);
   };
 
   return (
@@ -46,7 +41,7 @@ function SinglePlaylistPage() {
           Delete Playlist
         </button>
       </div>
-      {playlist.length ? (
+      {playlist.videos.length ? (
         <main className="video-lib__listing-page">
           {playlist.videos.map(item => (
             <ListingVideoComponent video={item}>

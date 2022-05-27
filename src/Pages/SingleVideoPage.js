@@ -27,7 +27,7 @@ function SingleVideoPage({ toastRef, getData }) {
 
   const handleCRUD = (func, message, type, funcParam1) => {
     if (auth.isAuth) {
-      func(funcParam1, dispatch);
+      func(funcParam1, dispatch, auth.token);
       toastRef.current.show();
       getData(message, type);
     } else {
@@ -60,7 +60,7 @@ function SingleVideoPage({ toastRef, getData }) {
               width="100%"
               height="100%"
               ref={videoRef}
-              onPlay={() => addToHistory(video, dispatch)}
+              onPlay={() => addToHistory(video, dispatch, auth.token)}
             />
           </div>
           <div className="video-info-container">

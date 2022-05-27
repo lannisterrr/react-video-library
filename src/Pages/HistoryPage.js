@@ -28,13 +28,13 @@ function HistoryPage({ toastRef, getData }) {
   }, []);
 
   const handleDeleteFromHistory = videoId => {
-    removeFromHistory(videoId, dispatch);
+    removeFromHistory(videoId, dispatch, auth.token);
     toastRef.current.show();
     getData('Video Deleted from history', 'fail');
   };
 
   const handleClearHistory = () => {
-    clearHistory(dispatch);
+    clearHistory(dispatch, auth.token);
     toastRef.current.show();
     getData('History cleared', 'fail');
   };

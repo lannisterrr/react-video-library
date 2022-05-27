@@ -1,19 +1,17 @@
 import axios from 'axios';
 
-const config = {
-  headers: {
-    authorization: localStorage.getItem('token'),
-  },
-};
-
-const createPlaylist = async (playlistName, dispatch) => {
+const createPlaylist = async (playlistName, dispatch, token) => {
   try {
     const response = await axios.post(
       '/api/user/playlists',
       {
         playlist: { title: playlistName, description: 'Playlist' },
       },
-      config
+      {
+        headers: {
+          authorization: token,
+        },
+      }
     );
     dispatch({ type: 'CREATE_NEW_PLAYLIST', payload: response.data.playlists });
     console.log(response.data.playlists);
@@ -22,24 +20,31 @@ const createPlaylist = async (playlistName, dispatch) => {
   }
 };
 
-const deletePlaylist = async (playlistId, dispatch) => {
+const deletePlaylist = async (playlistId, dispatch, token) => {
+  console.log(token, 'delete token');
   try {
-    const response = await axios.delete(
-      `/api/user/playlists/${playlistId}`,
-      config
-    );
+    const response = await axios.delete(`/api/user/playlists/${playlistId}`, {
+      headers: {
+        authorization: token,
+      },
+    });
     dispatch({ type: 'DELETE_PLAYLIST', payload: response.data.playlists });
   } catch (e) {
     console.log(e);
   }
 };
 
-const addToPlaylist = async (playlistId, video, dispatch) => {
+const addToPlaylist = async (playlistId, video, dispatch, token) => {
+  console.log(token);
   try {
     const response = await axios.post(
       `/api/user/playlists/${playlistId}`,
       { video },
-      config
+      {
+        headers: {
+          authorization: token,
+        },
+      }
     );
     dispatch({
       type: 'ADD_VIDEO_TO_PLAYLIST',
@@ -50,11 +55,15 @@ const addToPlaylist = async (playlistId, video, dispatch) => {
   }
 };
 
-const deleteFromPlaylist = async (playlistId, videoId, dispatch) => {
+const deleteFromPlaylist = async (playlistId, videoId, dispatch, token) => {
   try {
     const response = await axios.delete(
       `/api/user/playlists/${playlistId}/${videoId}`,
-      config
+      {
+        headers: {
+          authorization: token,
+        },
+      }
     );
     dispatch({
       type: 'REMOVE_VIDEO_FROM_PLAYLIST',

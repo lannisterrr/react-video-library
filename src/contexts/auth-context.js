@@ -78,6 +78,7 @@ const AuthProvider = ({ children }) => {
 
     return { token: '', isAuth: false };
   });
+  console.log(auth, 'auth');
   const contextValue = {
     loginState,
     dispatch,
