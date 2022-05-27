@@ -46,19 +46,23 @@ function SinglePlaylistPage() {
           Delete Playlist
         </button>
       </div>
-      <main className="video-lib__listing-page">
-        {playlist.videos.map(item => (
-          <ListingVideoComponent video={item}>
-            <span
-              onClick={() => handleVideoDeleteFromPlaylist(item._id)}
-              className="f-6 w-100 menu-item pointer"
-            >
-              <i class="fa-solid fa-trash f-8 p-h-2"></i>
-              Remove from {playlist.title}
-            </span>
-          </ListingVideoComponent>
-        ))}
-      </main>
+      {playlist.length ? (
+        <main className="video-lib__listing-page">
+          {playlist.videos.map(item => (
+            <ListingVideoComponent video={item}>
+              <span
+                onClick={() => handleVideoDeleteFromPlaylist(item._id)}
+                className="f-6 w-100 menu-item pointer"
+              >
+                <i class="fa-solid fa-trash f-8 p-h-2"></i>
+                Remove from {playlist.title}
+              </span>
+            </ListingVideoComponent>
+          ))}
+        </main>
+      ) : (
+        <main className="center-text f-8 f-bold">No Videos added</main>
+      )}
     </>
   );
 }
