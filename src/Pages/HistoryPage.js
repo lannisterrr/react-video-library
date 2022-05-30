@@ -16,7 +16,7 @@ function HistoryPage({ toastRef, getData }) {
       try {
         const res = await axios.get('/api/user/history', {
           headers: {
-            authorization: localStorage.getItem('token'),
+            authorization: auth.token,
           },
         });
         dispatch({ type: 'GET_HISTORY', payload: res.data.history });

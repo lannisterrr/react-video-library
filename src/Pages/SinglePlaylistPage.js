@@ -4,6 +4,7 @@ import { useData } from '../contexts/data-context';
 import { deletePlaylist, deleteFromPlaylist } from '../utils/playlist-util';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../contexts/auth-context';
+import Error404 from '../components/Error404';
 
 function SinglePlaylistPage() {
   const { auth } = useAuth();
@@ -25,7 +26,7 @@ function SinglePlaylistPage() {
     deleteFromPlaylist(playlistID, videoId, dispatch, auth.token);
   };
 
-  return (
+  return playlist ? (
     <>
       <Helmet>
         <title>{playlist.title}</title>
@@ -41,6 +42,7 @@ function SinglePlaylistPage() {
           Delete Playlist
         </button>
       </div>
+
       {playlist.videos.length ? (
         <main className="video-lib__listing-page">
           {playlist.videos.map(item => (
@@ -59,6 +61,8 @@ function SinglePlaylistPage() {
         <main className="center-text f-8 f-bold">No Videos added</main>
       )}
     </>
+  ) : (
+    <Error404>No Playlist created</Error404>
   );
 }
 

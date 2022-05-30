@@ -41,6 +41,9 @@ function LikePage({ toastRef, getData }) {
         <main className="center-text f-8 f-bold">No likes added</main>
       ) : (
         <>
+          <p className="center-text f-8 f-bold page-heading t-c-3">
+            Liked Videos
+          </p>
           <main className="video-lib__listing-page">
             {dataState.likes.map(item => (
               <ListingVideoComponent key={item.id} video={item}>

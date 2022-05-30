@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player/youtube';
 import { useData } from '../contexts/data-context';
@@ -12,6 +12,7 @@ import {
 } from '../utils/watchLater-util';
 import { Notes } from '../components/Notes';
 import { Helmet } from 'react-helmet';
+import Error404 from '../components/Error404';
 
 function SingleVideoPage({ toastRef, getData }) {
   const [showModal, setShowModal] = useState(false);
@@ -19,11 +20,12 @@ function SingleVideoPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
   const { videoId } = useParams();
   const videoRef = useRef();
-
   function getVideoDetails(videos, videoId) {
     return videos.find(video => video._id === videoId);
   }
   const video = getVideoDetails(dataState.videos, videoId);
+
+  console.log(video);
 
   const handleCRUD = (func, message, type, funcParam1) => {
     if (auth.isAuth) {
@@ -45,7 +47,7 @@ function SingleVideoPage({ toastRef, getData }) {
     }
   };
 
-  return (
+  return video ? (
     <>
       <Helmet>
         <title>Video</title>
@@ -133,6 +135,8 @@ function SingleVideoPage({ toastRef, getData }) {
         />
       )}
     </>
+  ) : (
+    <Error404 />
   );
 }
 
