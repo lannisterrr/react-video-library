@@ -61,8 +61,8 @@ const signInReducer = (state, action) => {
     case 'FILL_GUEST':
       return {
         ...state,
-        email: 'adarshbalika@gmail.com',
-        password: 'adarshBalika123',
+        email: 'test@test.com',
+        password: 'test123',
       };
 
     default:
