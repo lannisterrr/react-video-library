@@ -4,8 +4,9 @@ const loginService = async (email, password) => {
     email,
     password,
   });
-
+  console.log(res, 'outside try');
   try {
+    console.log(res, 'in try block');
     if (res.status === 200) {
       return res.data.encodedToken;
     } else {

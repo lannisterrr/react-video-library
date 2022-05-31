@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
+import { Helmet } from 'react-helmet';
 
 function WatchLaterPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
@@ -28,10 +29,17 @@ function WatchLaterPage({ toastRef, getData }) {
 
   return (
     <>
+      <Helmet>
+        <title>WatchLater</title>
+      </Helmet>
       {dataState.watchLater.length === 0 ? (
-        <main className="center-text f-8 f-bold">No Watchlater added</main>
+        <main className="center-text f-8 f-bold ">No Watchlater added</main>
       ) : (
         <>
+          <p className="center-text f-8 f-bold page-heading t-c-3">
+            Watchlater
+          </p>
+
           <main className="video-lib__listing-page">
             {dataState.watchLater.map(item => (
               <ListingVideoComponent

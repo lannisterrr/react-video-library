@@ -24,6 +24,12 @@
   --transition-speed: 600ms;
 }
 
+.page-heading {
+  padding: 1rem 0;
+  margin: 0;
+  background-color: var(--bg-primary);
+}
+
 .video-lib-text-1 {
   color: var(--text-primary);
 }

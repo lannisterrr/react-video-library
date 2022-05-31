@@ -3,6 +3,7 @@ import { useClickOutside } from '../customHooks/useClickOutside';
 import reactDom from 'react-dom';
 import { useData } from '../contexts/data-context';
 import { usePlaylist } from '../contexts/playlist-context';
+import { useAuth } from '../contexts/auth-context';
 import {
   createPlaylist,
   addToPlaylist,
@@ -13,6 +14,9 @@ import { useLocation } from 'react-router-dom';
 const Modal = ({ setShowModal, video, toastRef, getData, setShowMenu }) => {
   const { playListState, dispatch: playListDispatch } = usePlaylist();
   const { dataState, dispatch: userDataDispatch } = useData();
+  const { auth } = useAuth();
+  let playObjId = null;
+  console.log(playObjId);
   const location = useLocation();
   let domNode = useClickOutside(() => setShowModal(false));
 
@@ -21,22 +25,25 @@ const Modal = ({ setShowModal, video, toastRef, getData, setShowMenu }) => {
       playListDispatch({ type: 'ERROR_SHOW' });
       return;
     }
-    const unique = dataState.playlists.find(
+    const notUnique = dataState.playlists.find(
       playlist => playlist.title === playListState.playlistName
     );
-    if (unique) return;
-    createPlaylist(playListState.playlistName, userDataDispatch);
+    if (notUnique) return;
+
+    createPlaylist(playListState.playlistName, userDataDispatch, auth.token);
     playListDispatch({ type: 'INPUT_CLEAR' });
+
+    // addToPlaylist(playObjId, video, userDataDispatch);
   };
 
   const handlePlaylistCRUD = (e, item) => {
     if (e.target.checked) {
-      addToPlaylist(item._id, video, userDataDispatch);
+      addToPlaylist(item._id, video, userDataDispatch, auth.token);
       setShowModal(false);
       toastRef.current.show();
       getData('video added to playlist!', 'success');
     } else {
-      deleteFromPlaylist(item._id, video._id, userDataDispatch);
+      deleteFromPlaylist(item._id, video._id, userDataDispatch, auth.token);
       setShowModal(false);
       toastRef.current.show();
       getData('video deleted from playlist', 'fail');
@@ -54,23 +61,24 @@ const Modal = ({ setShowModal, video, toastRef, getData, setShowMenu }) => {
           ></i>
         </div>
         <div className="modal-content video-lib__modal-content p-8">
-          <Checkbox title="Add to watch Later" />
-          {dataState.playlists &&
-            dataState.playlists.map((item, index) => {
-              let isVideoInPlaylist = item.videos.some(
-                i_video => i_video._id === video._id
-              );
-              console.log(isVideoInPlaylist);
-              return (
-                <Checkbox
-                  key={item._id}
-                  defaultChecked={isVideoInPlaylist}
-                  id={`playlist-checkbox-${index + 1}`}
-                  title={item.title}
-                  handleCheckboxChange={e => handlePlaylistCRUD(e, item)}
-                />
-              );
-            })}
+          {dataState.playlists.length === 0 && (
+            <p className="f-6 t-c-3">No playlist added!</p>
+          )}
+          {dataState.playlists.map((item, index) => {
+            playObjId = item;
+            let isVideoInPlaylist = item.videos.some(
+              i_video => i_video._id === video._id
+            );
+            return (
+              <Checkbox
+                key={item._id}
+                defaultChecked={isVideoInPlaylist}
+                id={`playlist-checkbox-${index + 1}`}
+                title={item.title}
+                handleCheckboxChange={e => handlePlaylistCRUD(e, item)}
+              />
+            );
+          })}
         </div>
         {playListState.showPlaylistAdd && (
           <div className="video-lib__add-playlist p-4">

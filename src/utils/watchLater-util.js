@@ -1,19 +1,17 @@
 import axios from 'axios';
 
-const config = {
-  headers: {
-    authorization: localStorage.getItem('token'),
-  },
-};
-
-const addToWatchLater = async (video, dispatch) => {
+const addToWatchLater = async (video, dispatch, token) => {
   try {
     const response = await axios.post(
       '/api/user/watchlater',
       {
         video,
       },
-      config
+      {
+        headers: {
+          authorization: token,
+        },
+      }
     );
     dispatch({ type: 'ADD_TO_WATCHLATER', payload: response.data.watchlater });
   } catch (e) {
@@ -21,12 +19,13 @@ const addToWatchLater = async (video, dispatch) => {
   }
 };
 
-const removeFromWatchLater = async (videoId, dispatch) => {
+const removeFromWatchLater = async (videoId, dispatch, token) => {
   try {
-    const response = await axios.delete(
-      `/api/user/watchlater/${videoId}`,
-      config
-    );
+    const response = await axios.delete(`/api/user/watchlater/${videoId}`, {
+      headers: {
+        authorization: token,
+      },
+    });
     dispatch({
       type: 'REMOVE_FROM_WATCHLATER',
       payload: response.data.watchlater,

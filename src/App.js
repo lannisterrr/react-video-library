@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
 import MockmanEs from 'mockman-js';
+import { Helmet } from 'react-helmet';
+
 import {
   Home,
   SingleVideoPage,
@@ -16,6 +18,7 @@ import RequiresAuth from './components/RequiresAuth';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Toast from './components/Toast';
 import SinglePlaylistPage from './Pages/SinglePlaylistPage';
+import Error404 from './components/Error404';
 
 function App() {
   const [toastData, setToastData] = useState({
@@ -34,6 +37,12 @@ function App() {
   const toastRef = useRef(null);
   return (
     <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Psychology Tube</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+        <meta name="description" content="Video librarys" />
+      </Helmet>
       {location.pathname !== '/auth' && <Navbar />}
       <Sidebar />
       <Toast ref={toastRef} message={toastData.message} type={toastData.type} />
@@ -69,7 +78,7 @@ function App() {
           path="/history"
           element={
             <RequiresAuth>
-              <HistoryPage toastRef={toastRef} getData={getToastProps}/>
+              <HistoryPage toastRef={toastRef} getData={getToastProps} />
             </RequiresAuth>
           }
         />
@@ -91,14 +100,7 @@ function App() {
           }
         />
         <Route path="/auth" element={<Auth />} />
-        <Route
-          path="*"
-          element={
-            <main>
-              <p className="heading-3 t-c-3 p-4">There's nothing here!</p>
-            </main>
-          }
-        />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
   );

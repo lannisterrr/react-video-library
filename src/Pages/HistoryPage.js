@@ -4,6 +4,7 @@ import { useData } from '../contexts/data-context';
 import { useAuth } from '../contexts/auth-context';
 import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { clearHistory, removeFromHistory } from '../utils/history-util';
+import { Helmet } from 'react-helmet';
 
 function HistoryPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
@@ -15,7 +16,7 @@ function HistoryPage({ toastRef, getData }) {
       try {
         const res = await axios.get('/api/user/history', {
           headers: {
-            authorization: localStorage.getItem('token'),
+            authorization: auth.token,
           },
         });
         dispatch({ type: 'GET_HISTORY', payload: res.data.history });
@@ -27,19 +28,22 @@ function HistoryPage({ toastRef, getData }) {
   }, []);
 
   const handleDeleteFromHistory = videoId => {
-    removeFromHistory(videoId, dispatch);
+    removeFromHistory(videoId, dispatch, auth.token);
     toastRef.current.show();
     getData('Video Deleted from history', 'fail');
   };
 
   const handleClearHistory = () => {
-    clearHistory(dispatch);
+    clearHistory(dispatch, auth.token);
     toastRef.current.show();
     getData('History cleared', 'fail');
   };
 
   return (
     <>
+      <Helmet>
+        <title>History</title>
+      </Helmet>
       {dataState.history.length === 0 ? (
         <main className="center-text f-8 f-bold">
           Watch videos to see in the historyy!!

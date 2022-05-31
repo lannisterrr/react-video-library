@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player/youtube';
 import { useData } from '../contexts/data-context';
@@ -11,6 +11,8 @@ import {
   removeFromWatchLater,
 } from '../utils/watchLater-util';
 import { Notes } from '../components/Notes';
+import { Helmet } from 'react-helmet';
+import Error404 from '../components/Error404';
 
 function SingleVideoPage({ toastRef, getData }) {
   const [showModal, setShowModal] = useState(false);
@@ -18,15 +20,16 @@ function SingleVideoPage({ toastRef, getData }) {
   const { dataState, dispatch } = useData();
   const { videoId } = useParams();
   const videoRef = useRef();
-
   function getVideoDetails(videos, videoId) {
     return videos.find(video => video._id === videoId);
   }
   const video = getVideoDetails(dataState.videos, videoId);
 
+  console.log(video);
+
   const handleCRUD = (func, message, type, funcParam1) => {
     if (auth.isAuth) {
-      func(funcParam1, dispatch);
+      func(funcParam1, dispatch, auth.token);
       toastRef.current.show();
       getData(message, type);
     } else {
@@ -44,8 +47,11 @@ function SingleVideoPage({ toastRef, getData }) {
     }
   };
 
-  return (
+  return video ? (
     <>
+      <Helmet>
+        <title>Video</title>
+      </Helmet>
       <main className="single-videoPage__wrapper">
         <div className="video-content">
           <div className="video-container">
@@ -56,7 +62,7 @@ function SingleVideoPage({ toastRef, getData }) {
               width="100%"
               height="100%"
               ref={videoRef}
-              onPlay={() => addToHistory(video, dispatch)}
+              onPlay={() => addToHistory(video, dispatch, auth.token)}
             />
           </div>
           <div className="video-info-container">
@@ -129,6 +135,8 @@ function SingleVideoPage({ toastRef, getData }) {
         />
       )}
     </>
+  ) : (
+    <Error404 />
   );
 }
 

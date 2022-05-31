@@ -2,9 +2,12 @@ import { ListingVideoComponent } from '../components/ListingVideoComponent';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useData } from '../contexts/data-context';
 import { deletePlaylist, deleteFromPlaylist } from '../utils/playlist-util';
+import { Helmet } from 'react-helmet';
+import { useAuth } from '../contexts/auth-context';
+import Error404 from '../components/Error404';
 
-import { useEffect } from 'react';
 function SinglePlaylistPage() {
+  const { auth } = useAuth();
   const navigate = useNavigate();
   const { dataState, dispatch } = useData();
   const { playlistID } = useParams();
@@ -14,23 +17,20 @@ function SinglePlaylistPage() {
   }
   const playlist = getPlaylistDetails(dataState.playlists, playlistID);
 
-  useEffect(() => {
-    if (playlist.videos.length === 0) {
-      navigate('/playlist');
-    }
-  }, [playlist.videos]);
-
   const handleDeletePlaylist = () => {
-    deletePlaylist(playlistID, dispatch);
+    deletePlaylist(playlistID, dispatch, auth.token);
     navigate('/playlist');
   };
 
   const handleVideoDeleteFromPlaylist = videoId => {
-    deleteFromPlaylist(playlistID, videoId, dispatch);
+    deleteFromPlaylist(playlistID, videoId, dispatch, auth.token);
   };
 
-  return (
+  return playlist ? (
     <>
+      <Helmet>
+        <title>{playlist.title}</title>
+      </Helmet>
       <div className="playlist-header">
         <p className="heading-3 t-c-3 center-text playlist-title">
           Playlist Name : ({playlist.title})
@@ -42,20 +42,27 @@ function SinglePlaylistPage() {
           Delete Playlist
         </button>
       </div>
-      <main className="video-lib__listing-page">
-        {playlist.videos.map(item => (
-          <ListingVideoComponent video={item}>
-            <span
-              onClick={() => handleVideoDeleteFromPlaylist(item._id)}
-              className="f-6 w-100 menu-item pointer"
-            >
-              <i class="fa-solid fa-trash f-8 p-h-2"></i>
-              Remove from {playlist.title}
-            </span>
-          </ListingVideoComponent>
-        ))}
-      </main>
+
+      {playlist.videos.length ? (
+        <main className="video-lib__listing-page">
+          {playlist.videos.map(item => (
+            <ListingVideoComponent video={item}>
+              <span
+                onClick={() => handleVideoDeleteFromPlaylist(item._id)}
+                className="f-6 w-100 menu-item pointer"
+              >
+                <i class="fa-solid fa-trash f-8 p-h-2"></i>
+                Remove from {playlist.title}
+              </span>
+            </ListingVideoComponent>
+          ))}
+        </main>
+      ) : (
+        <main className="center-text f-8 f-bold">No Videos added</main>
+      )}
     </>
+  ) : (
+    <Error404>No Playlist created</Error404>
   );
 }
 
